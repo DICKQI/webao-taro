@@ -33,7 +33,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: 'webao',
       navigationBarTextStyle: 'black'
     },
     tabBar:{

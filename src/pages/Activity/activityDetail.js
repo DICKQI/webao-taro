@@ -7,6 +7,11 @@ import '../users/dashboard.scss'
 
 export default class activityDetail extends Component {
 
+
+  config = {
+    navigationBarTitleText: this.state.name
+  };
+
   constructor() {
     super(...arguments);
     this.state = ({
@@ -14,7 +19,8 @@ export default class activityDetail extends Component {
       name: '',
       reward: [],
       description: '',
-      p_number: 0
+      p_number: 0,
+      id: ''
     })
   }
 
@@ -33,6 +39,7 @@ export default class activityDetail extends Component {
       }
     });
 
+    // 获取活动详情
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/activity?id=' + this.$router.params.id,
       method: "GET",
@@ -46,7 +53,8 @@ export default class activityDetail extends Component {
           reward: res.data[0].reward,
           name: res.data[0].name,
           description: res.data[0].description,
-          p_number: res.data[0].p_number
+          p_number: res.data[0].p_number,
+          id: res.data[0].id
         })
       } else {
         Taro.atMessage({
@@ -59,11 +67,24 @@ export default class activityDetail extends Component {
 
   joinInActivity(mid) {
     Taro.request({
-      url: 'https://www.r-share.cn/webao_war/account/activity?id=' + mid,
-      header:{
+      url: 'https://www.r-share.cn/webao_war/activity/join?id=' + mid,
+      header: {
         'Cookie': save.MyLoginSessionID
       }
-    }).then()
+    }).then(res => {
+      if (res.statusCode === 200) {
+        Taro.atMessage({
+          'message': '祝好运呢！！！',
+          'type': 'success'
+        });
+
+      } else {
+        Taro.atMessage({
+          'message': res.data[0].msg,
+          'type': 'error'
+        })
+      }
+    })
   }
 
   render() {
@@ -94,7 +115,7 @@ export default class activityDetail extends Component {
         {
 
           <View className='userInfo'>
-            <AtButton size={"small"} type={"primary"}>
+            <AtButton size={"small"} type={"primary"} onClick={this.joinInActivity.bind(this, this.state.id)}>
               参加抽奖
             </AtButton>
           </View>

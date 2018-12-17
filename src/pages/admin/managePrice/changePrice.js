@@ -94,7 +94,15 @@ export default class changePrice extends Component {
       }
     }).then(res => {
       if (res.statusCode === 200) {
-        Taro.navigateBack()
+        Taro.atMessage({
+          'message': '修改成功',
+          'type': 'success'
+        });
+        setTimeout(() => {
+          Taro.reLaunch({
+            url: '/pages/users/dashboard'
+          })
+        }, 1500)
       } else {
         Taro.atMessage({
           'message': res.data[0].msg,

@@ -105,7 +105,7 @@ export default class listPrice extends Component {
       <View>
         {
           this.state.priceList.map(item => {
-            return <View><AtButton type={"secondary"} onClick={this.checkPrice.bind(this, item.id)}> {item.name}</AtButton></View>
+            return <View style='margin: 3vh 0;'><AtButton type={"secondary"} onClick={this.checkPrice.bind(this, item.id)}> {item.name}</AtButton></View>
           })
         }
         {

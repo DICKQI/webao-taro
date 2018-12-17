@@ -88,14 +88,14 @@ export default class resetPassword extends Component {
 
   render() {
     return (
-      <View>
+      <View style='text-align: center;display: flex;justify-content: center;flex-direction: column;align-items: center;margin: 3vh 0;'>
         <AtInput title='用户名' type='text' name='username' onChange={this.setUsername.bind(this)}
                  value={this.state.username}/>
         <AtInput title='旧密码' type='password' name='oldPassword' onChange={this.setOldPassword.bind(this)}
                  value={this.state.oldPassword} placeholder='必填'/>
         <AtInput title='新密码' type='password' name='newPassword' onChange={this.setNewPassword.bind(this)}
                  value={this.state.newPassword} placeholder='必填'/>
-        <AtButton type={"secondary"} formType='submit' onClick={this.rePassword.bind(this)}>提交</AtButton>
+        <AtButton type={"primary"} formType='submit' onClick={this.rePassword.bind(this)}>提交</AtButton>
         <AtMessage/>
       </View>
     )

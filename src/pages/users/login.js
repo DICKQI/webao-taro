@@ -51,12 +51,15 @@ export default class MyLogin extends Component {
 
         save.MyLoginSessionID = res.header['Set-Cookie'];
         save.MyID = res.data[0].id;
-        Taro.reLaunch({
-          url: '/pages/users/dashboard'
-        }).then(Taro.atMessage({
-          'message': '登录成功',
-          'type': 'success'
-        }))
+        Taro.atMessage({
+          "message": '登录成功',
+          "type": 'success'
+        });
+        setTimeout(() => {
+          Taro.reLaunch({
+            url: '/pages/users/dashboard'
+          })
+        }, 1500)
       } else {
         this.setState({
           loading: false
@@ -78,7 +81,7 @@ export default class MyLogin extends Component {
 
       <View>
         <View className='userInfo'>
-          <Image src={pig} />
+          <Image src={pig}/>
           <View style='margin: 3vh 0;'>
             <AtInput title='用户名' name='username' type='text' onChange={this.setUsername.bind(this)}
                      value={this.state.username} placeholder='请输入用户名'/>

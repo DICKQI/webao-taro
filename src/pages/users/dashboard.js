@@ -77,12 +77,13 @@ export default class dashboard extends Component {
       url: '/pages/admin/managePrice/addPrice'
     })
   }
+
   toList() {
     this.setState({
       openedManagePrice: false
     });
     Taro.navigateTo({
-      url:'/pages/admin/managePrice/listPrice'
+      url: '/pages/admin/managePrice/listPrice'
     })
   }
 
@@ -125,12 +126,16 @@ export default class dashboard extends Component {
           openedManagePrice: true
         });
         break;
+      case 2:
+        Taro.navigateTo({
+          url: '/pages/admin/manageActivity/ActivityList'
+        })
     }
   };
 
   newActivity() {
     Taro.navigateTo({
-      url:'/pages/admin/manageActivity/addActivity'
+      url: '/pages/admin/manageActivity/addActivity'
     })
   }
 
@@ -144,8 +149,8 @@ export default class dashboard extends Component {
                 <AtAvatar className='at-row__align-content--end' circle size={"large"}
                           image='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544496842193&di=bb5d519e49746f85df5e6c7921016f59&imgtype=0&src=http%3A%2F%2Fs9.rr.itc.cn%2Fr%2FwapChange%2F20171_18_16%2Fa9i5ff9624017280331.jpg'>
                 </AtAvatar>
-                  <View style='margin: 2vh 0;'>欢迎{this.state.username}</View>
-                  <View style='margin: 2vh 0;'>用户组：{this.state.userRole}</View>
+                <View style='margin: 2vh 0;'>欢迎{this.state.username}</View>
+                <View style='margin: 2vh 0;'>用户组：{this.state.userRole}</View>
               </View>
 
               <View>
@@ -185,7 +190,7 @@ export default class dashboard extends Component {
                         }
                       ]
                     }/>
-                    <View>
+                    <View style='margin-left:10px;margin-right: 10px'>
                       <AtButton type='primary' onClick={this.newActivity.bind(this)}>
                         发起抽奖
                       </AtButton>
@@ -196,7 +201,14 @@ export default class dashboard extends Component {
               }
             </View>
             :
-            <View>您还未登录呢，点击<Text onClick={this.jumpToLogin.bind()}>登录</Text></View>
+
+            <View style='margin-top: 50%;color:dodgerblue'>
+              <View
+                style='text-align: center;display: flex;justify-content: center;flex-direction: column;align-items: center;'><View style='margin-bottom:3%'>你还未登录呢，还不能进行别的操作嚯</View>
+                <AtButton size={"small"} type={"primary"}
+                          onClick={this.jumpToLogin.bind(this)}>点击我进入登录界面吧</AtButton>
+              </View>
+            </View>
         }
         <AtMessage/>
         <AtActionSheet isOpened={this.state.openedManagePrice} cancelText='取消' onCancel={this.sheetCancel.bind(this)}>

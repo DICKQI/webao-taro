@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Text} from '@tarojs/components'
-import {AtButton, AtMessage, AtCard} from 'taro-ui'
+import {View} from '@tarojs/components'
+import {AtMessage, AtCard, AtNavBar} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import './dashboard.scss'
@@ -15,6 +15,10 @@ export default class myActivity extends Component {
     }
   }
 
+  config = {
+    navigationBarTitleText: '我参加的活动'
+  };
+
   componentDidMount() {
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/account/activity?id=' + save.MyID,
@@ -24,7 +28,7 @@ export default class myActivity extends Component {
     }).then(res => {
       if (res.statusCode === 200) {
         this.setState({
-          activity:res.data
+          activity: res.data
         })
       }
     })
@@ -32,16 +36,16 @@ export default class myActivity extends Component {
 
   toDetail(mid) {
     Taro.navigateTo({
-      url:'/pages/Activity/activityDetail?id=' + mid
+      url: '/pages/Activity/activityDetail?id=' + mid
     })
   }
 
   render() {
     return (
       <View>
-        我参加的活动
+        <AtNavBar>我参加的活动</AtNavBar>
         {
-          this.state.activity.map(item=>{
+          this.state.activity.map(item => {
             return <View>
               <AtCard onClick={this.toDetail.bind(this, item.id)} title={item.name}>
                 {item.description}
@@ -49,6 +53,7 @@ export default class myActivity extends Component {
             </View>
           })
         }
+        <AtMessage/>
       </View>
     );
   }

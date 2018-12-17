@@ -12,11 +12,11 @@ export default class addReward extends Component {
     this.state = {
       price: [],
       reward: [],
-      rewardName:[],
+      rewardName: [],
       choose: false,
-      id:'',
-      number:'',
-      available:''
+      id: '',
+      number: '',
+      available: ''
     };
   }
 
@@ -37,8 +37,8 @@ export default class addReward extends Component {
   setReward() {
     this.state.rewardName.push(this.state.name + ":" + this.state.number);
     this.state.reward.push({
-      id:this.state.id,
-      number:this.state.number
+      id: this.state.id,
+      number: this.state.number
     });
     this.setState({
       rewardName: this.state.rewardName,
@@ -50,16 +50,16 @@ export default class addReward extends Component {
 
   setNumber(e) {
     this.setState({
-      number:e
+      number: e
     })
   }
 
   openFloat(id, name, available) {
     console.log(id, name, available);
     this.setState({
-      id:id,
-      name:name,
-      available:available,
+      id: id,
+      name: name,
+      available: available,
       choose: true
     })
   }
@@ -82,7 +82,12 @@ export default class addReward extends Component {
         Taro.atMessage({
           'message': '添加成功',
           'type': 'success'
-        })
+        });
+        setTimeout(() => {
+          Taro.reLaunch({
+            url: '/pages/index/index'
+          })
+        }, 1500)
       } else {
         Taro.atMessage({
           'message': res.data[0].msg,
@@ -95,19 +100,22 @@ export default class addReward extends Component {
   render() {
     return (
       <View>
-        <AtTextarea value={this.state.rewardName} disabled={true}/>
+        <AtTextarea count={false} value={this.state.rewardName} disabled={true}/>
         {
-          this.state.price.map(item=>{
+          this.state.price.map(item => {
             return <View onClick={this.openFloat.bind(this, item.id, item.name, item.available)}>
               奖品名：{item.name} 可用数量：{item.available}
             </View>
           })
         }
         <AtFloatLayout title='请选择数量' isOpened={this.state.choose}>
-          <AtInputNumber type={"number"} max={this.state.available} min={1} step={1} value={this.state.number} onChange={this.setNumber.bind(this)}/>
+          <AtInputNumber type={"number"} max={this.state.available} min={1} step={1} value={this.state.number}
+                         onChange={this.setNumber.bind(this)}/>
           <AtButton onClick={this.setReward.bind(this)}>确认</AtButton>
         </AtFloatLayout>
-        <AtButton type={"primary"} size={"small"} onClick={this.addReward.bind(this)}>确认添加</AtButton>
+        <View className='userInfo'>
+          <AtButton type={"primary"} size={"small"} onClick={this.addReward.bind(this)}>确认添加</AtButton>
+        </View>
         <AtMessage/>
       </View>
     );

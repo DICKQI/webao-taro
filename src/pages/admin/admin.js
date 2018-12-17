@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
-import {AtNoticebar, AtMessage, AtCard, AtActionSheet, AtActionSheetItem} from 'taro-ui'
+import {AtNavBar, AtMessage, AtCard, AtActionSheet, AtActionSheetItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../index/index.scss'
@@ -111,7 +111,7 @@ export default class admin extends Component {
   render() {
     return (
       <View className='at-article'>
-        <AtNoticebar>点击用户名查看当前用户信息</AtNoticebar>
+        <AtNavBar>点击用户名查看当前用户信息</AtNavBar>
         {
           this.state.userList.map(item => {
             return <View onClick={this.checkId.bind(this, item.id)} className='margin'>

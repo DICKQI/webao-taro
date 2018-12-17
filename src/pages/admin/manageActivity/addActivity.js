@@ -69,16 +69,20 @@ export default class addActivity extends Component {
 
   render() {
     return (
-      <View>
+      <View style='margin-top: 25%'>
         <View className='userInfo'>
           <AtInput title='活动名' name='name' onChange={this.setName.bind(this)}
                    placeholder='请输入抽奖活动名'/>
         </View>
-        <AtTextarea style='margin: 3vh 0;' value={this.state.description} onChange={this.setDescription.bind(this)}
+        <View style='margin: 10px'>
+        <AtTextarea value={this.state.description} onChange={this.setDescription.bind(this)}
                     maxlength='200' placeholder='请输入抽奖描述'/>
+        </View>
+        <View style='margin-left:10px;margin-right: 10px'>
         <AtButton type={"primary"} onClick={this.addActivity.bind(this)}>
           创建
         </AtButton>
+        </View>
         <AtMessage/>
       </View>
     )
