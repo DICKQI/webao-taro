@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
-import {AtButton, AtMessage, AtAvatar, AtGrid} from 'taro-ui'
+import {AtButton, AtMessage, AtAvatar, AtGrid, AtActionSheet, AtActionSheetItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import './dashboard.scss'
@@ -23,13 +23,14 @@ export default class dashboard extends Component {
       username: '',
       status: false,
       userRole: '',
-      isAdmin: false
+      isAdmin: false,
+      openedManagePrice: false
     }
   }
 
   componentDidMount() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account',
+      url: 'https://www.r-share.cn/webao_war/account',
       method: "GET",
       data: {
         id: save.MyID
@@ -68,6 +69,29 @@ export default class dashboard extends Component {
     })
   }
 
+  toAdd() {
+    this.setState({
+      openedManagePrice: false
+    });
+    Taro.navigateTo({
+      url: '/pages/admin/managePrice/addPrice'
+    })
+  }
+  toList() {
+    this.setState({
+      openedManagePrice: false
+    });
+    Taro.navigateTo({
+      url:'/pages/admin/managePrice/listPrice'
+    })
+  }
+
+  sheetCancel() {
+    this.setState({
+      openedManagePrice: false
+    })
+  }
+
   userAction = (item, index) => {
     switch (index) {
       case 0:
@@ -80,7 +104,13 @@ export default class dashboard extends Component {
       case 1:
         Taro.navigateTo({
           url: 'resetPassword'
-        })
+        });
+        break;
+      case 2:
+        Taro.navigateTo({
+          url: '/pages/users/myActivity'
+        });
+        break;
     }
   };
   priceAction = (item, index) => {
@@ -91,8 +121,8 @@ export default class dashboard extends Component {
         });
         break;
       case 1:
-        Taro.navigateTo({
-          url: '/pages/admin/managePrice/manage'
+        this.setState({
+          openedManagePrice: true
         });
         break;
     }
@@ -169,6 +199,14 @@ export default class dashboard extends Component {
             <View>您还未登录呢，点击<Text onClick={this.jumpToLogin.bind()}>登录</Text></View>
         }
         <AtMessage/>
+        <AtActionSheet isOpened={this.state.openedManagePrice} cancelText='取消' onCancel={this.sheetCancel.bind(this)}>
+          <AtActionSheetItem onClick={this.toAdd.bind(this)}>
+            新增奖品
+          </AtActionSheetItem>
+          <AtActionSheetItem onClick={this.toList.bind(this)}>
+            商品列表
+          </AtActionSheetItem>
+        </AtActionSheet>
       </View>
 
     )

@@ -20,7 +20,7 @@ export default class resetPassword extends Component {
 
   componentDidMount() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account',
+      url: 'https://www.r-share.cn/webao_war/account',
       data: {
         id: save.MyID
       },
@@ -56,7 +56,7 @@ export default class resetPassword extends Component {
 
   rePassword() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account',
+      url: 'https://www.r-share.cn/webao_war/account',
       method: "PUT",
       data: {
         username: this.state.username,

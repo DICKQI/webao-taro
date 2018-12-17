@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
-import {AtButton, AtMessage, AtCard, AtActionSheet, AtActionSheetItem} from 'taro-ui'
+import {AtNoticebar, AtMessage, AtCard, AtActionSheet, AtActionSheetItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../index/index.scss'
@@ -24,7 +24,7 @@ export default class admin extends Component {
 
   componentDidMount() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account/list',
+      url: 'https://www.r-share.cn/webao_war/account/list',
       header: {
         'Cookie': save.MyLoginSessionID
       }
@@ -39,7 +39,7 @@ export default class admin extends Component {
 
   checkId(mid) {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account',
+      url: 'https://www.r-share.cn/webao_war/account',
       method: "GET",
       data: {
         id: mid
@@ -68,7 +68,7 @@ export default class admin extends Component {
       return
     }
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account/manage',
+      url: 'https://www.r-share.cn/webao_war/account/manage',
       method: "DELETE",
       data: {
         id: mid
@@ -111,7 +111,7 @@ export default class admin extends Component {
   render() {
     return (
       <View className='at-article'>
-        <Text className='at-article__h1'>点击用户名查看当前用户信息</Text>
+        <AtNoticebar>点击用户名查看当前用户信息</AtNoticebar>
         {
           this.state.userList.map(item => {
             return <View onClick={this.checkId.bind(this, item.id)} className='margin'>

@@ -21,7 +21,7 @@ export default class activityDetail extends Component {
   componentDidMount() {
     // 检查是否已经登录
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account/list',
+      url: 'https://www.r-share.cn/webao_war/account/list',
       header: {
         'Cookie': save.MyLoginSessionID
       }
@@ -32,8 +32,9 @@ export default class activityDetail extends Component {
         })
       }
     });
+
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/activity?id=' + this.$router.params.id,
+      url: 'https://www.r-share.cn/webao_war/activity?id=' + this.$router.params.id,
       method: "GET",
       header: {
         'Cookie': save.MyLoginSessionID
@@ -54,6 +55,15 @@ export default class activityDetail extends Component {
         })
       }
     })
+  }
+
+  joinInActivity(mid) {
+    Taro.request({
+      url: 'https://www.r-share.cn/webao_war/account/activity?id=' + mid,
+      header:{
+        'Cookie': save.MyLoginSessionID
+      }
+    }).then()
   }
 
   render() {
@@ -81,11 +91,14 @@ export default class activityDetail extends Component {
         <View className='at-article__p'>
           {this.state.description}
         </View>
-        <View className='userInfo'>
-          <AtButton size={"small"} type={"primary"}>
-            参加抽奖
-          </AtButton>
-        </View>
+        {
+
+          <View className='userInfo'>
+            <AtButton size={"small"} type={"primary"}>
+              参加抽奖
+            </AtButton>
+          </View>
+        }
         <View className='userInfo'>
           当前参与人数：{this.state.p_number}
         </View>

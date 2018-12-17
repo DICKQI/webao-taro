@@ -44,7 +44,7 @@ export default class addPrice extends Component {
 
   addPrice() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/prize',
+      url: 'https://www.r-share.cn/webao_war/prize',
       method: "POST",
       data: {
         name: this.state.name,

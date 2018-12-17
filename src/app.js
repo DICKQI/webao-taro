@@ -17,6 +17,7 @@ class App extends Component {
       'pages/users/login',
       'pages/users/register',
       'pages/users/resetPassword',
+      'pages/users/myActivity',
       'pages/admin/admin',
       'pages/admin/changeUser',
       'pages/admin/managePrice/manage',
@@ -24,7 +25,9 @@ class App extends Component {
       'pages/admin/managePrice/listPrice',
       'pages/admin/managePrice/changePrice',
       'pages/admin/manageActivity/addActivity',
-      'pages/manageActivity/activityDetail',
+      'pages/admin/manageActivity/ActivityList',
+      'pages/admin/manageActivity/addReward',
+      'pages/Activity/activityDetail',
 
     ],
     window: {

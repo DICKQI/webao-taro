@@ -21,6 +21,8 @@ export default class changeUser extends Component {
     });
   }
 
+
+
   setUsername(e) {
     this.setState({
       username: e
@@ -35,7 +37,7 @@ export default class changeUser extends Component {
 
   changeUserInfo() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account/manage',
+      url: 'https://www.r-share.cn/webao_war/account/manage',
       method: "PUT",
       data: {
         id: this.state.id,

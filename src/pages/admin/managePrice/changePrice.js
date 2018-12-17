@@ -21,7 +21,7 @@ export default class changePrice extends Component {
 
   componentDidMount() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/prize',
+      url: 'https://www.r-share.cn/webao_war/prize',
       data: {
         id: this.state.id
       },
@@ -78,7 +78,7 @@ export default class changePrice extends Component {
 
   changePrice() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/prize',
+      url: 'https://www.r-share.cn/webao_war/prize',
       method: "PUT",
       data: {
         name: this.state.name,

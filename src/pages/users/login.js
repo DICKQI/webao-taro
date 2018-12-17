@@ -37,7 +37,7 @@ export default class MyLogin extends Component {
       loading: true
     });
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/account/login',
+      url: 'https://www.r-share.cn/webao_war/account/login',
       method: "POST",
       data: {
         'username': this.state.username,

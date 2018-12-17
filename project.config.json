@@ -4,7 +4,7 @@
 	"description": "java作业啊",
 	"appid": "wxf610feff1d6c7b5c",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
@@ -13,5 +13,6 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
+	"libVersion": "2.4.2",
 	"condition": {}
 }

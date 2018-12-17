@@ -11,6 +11,7 @@ export default class ActivityList extends Component {
     super(...arguments);
     this.state = {
       activityList: [],
+      activityDetail:'',
       activityId: '',
       activityName: ''
     }
@@ -18,7 +19,7 @@ export default class ActivityList extends Component {
 
   componentDidMount() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/activity/list',
+      url: 'https://www.r-share.cn/webao_war/activity/list',
     }).then(res => {
       if (res.statusCode === 200) {
         this.setState({
@@ -30,7 +31,42 @@ export default class ActivityList extends Component {
           'type': 'error'
         })
       }
+    });
+  }
+  getDetail(mid) {
+    Taro.request({
+      url:'https://www.r-share.cn/webao_war/activity?id=' + mid,
+      header:{
+        'Cookie': save.MyLoginSessionID
+      },
+    }).then(res=>{
+      if (res.statusCode === 200) {
+        this.setState({
+
+        })
+      } else {
+        Taro.atMessage({
+          'message':res.data[0].msg,
+          'type':'error'
+        })
+      }
     })
   }
+
+  render() {
+    return (
+      <View>
+        {
+          this.state.activityList.map(item=>{
+            return <View className='userInfo'>
+              
+            </View>
+          })
+        }
+      </View>
+    );
+  }
+
+  
 
 }

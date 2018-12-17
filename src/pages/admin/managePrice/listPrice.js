@@ -23,7 +23,7 @@ export default class listPrice extends Component {
 
   componentDidMount() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/prize/list',
+      url: 'https://www.r-share.cn/webao_war/prize/list',
       header: {
         'Cookie': save.MyLoginSessionID
       }
@@ -43,7 +43,7 @@ export default class listPrice extends Component {
 
   checkPrice(mid) {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/prize',
+      url: 'https://www.r-share.cn/webao_war/prize',
       data: {
         id: mid
       },
@@ -72,7 +72,7 @@ export default class listPrice extends Component {
 
   deletePrice(mid) {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/prize?id=' + mid,
+      url: 'https://www.r-share.cn/webao_war/prize?id=' + mid,
       method: "DELETE",
       header: {
         'Cookie': save.MyLoginSessionID

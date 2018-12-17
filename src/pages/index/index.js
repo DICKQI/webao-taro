@@ -27,7 +27,7 @@ export default class Index extends Component {
 
   componentDidMount() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/activity/list'
+      url: 'https://www.r-share.cn/webao_war/activity/list'
     }).then(res => {
       if (res.statusCode === 200) {
         this.setState({
@@ -54,7 +54,7 @@ export default class Index extends Component {
 
   toAcDetail(mid) {
     Taro.navigateTo({
-      url:'/pages/manageActivity/activityDetail?id=' + mid
+      url: '/pages/Activity/activityDetail?id=' + mid
     })
   }
 
@@ -120,9 +120,10 @@ export default class Index extends Component {
         />
         <View className='more'>更多活动</View>
         {
-          this.state.activity.map(item=>{
+          this.state.activity.map(item => {
             return <View className='margin'>
-              <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name} extra={'发起人：' + item.author.username}>
+              <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
+                      extra={'发起人：' + item.author.username}>
                 抽奖详情：。。。。。。
               </AtCard>
             </View>
