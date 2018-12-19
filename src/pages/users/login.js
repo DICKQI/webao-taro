@@ -1,9 +1,12 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image} from "@tarojs/components"
-import {AtButton, AtInput, AtMessage} from 'taro-ui'
+import {AtButton, AtInput, AtMessage, AtGrid, AtDivider} from 'taro-ui'
 import save from '../../config/loginSave'
 import '../users/dashboard.scss'
-import pig from '../../static/pig.jpeg'
+import pig from '../../static/WEIAO.png'
+import wechat from '../../static/wechat.png'
+import qq from '../../static/qq.png'
+import weibo from '../../static/weibo.png'
 
 export default class MyLogin extends Component {
   config = {
@@ -80,19 +83,49 @@ export default class MyLogin extends Component {
     return (
 
       <View>
-        <View className='userInfo'>
-          <Image src={pig}/>
-          <View style='margin: 3vh 0;'>
+        <View style='display: flex;justify-content: center;align-items: center;flex-direction: column;'>
+          <View style='margin-top: 3vh'>
+            <Image mode={"widthFix"} src={pig} style='width: 25vh; height:25vh'/>
+          </View>
+          <View style='margin: 10vh 0;'>
             <AtInput title='用户名' name='username' type='text' onChange={this.setUsername.bind(this)}
                      value={this.state.username} placeholder='请输入用户名'/>
             <AtInput title='密码' name='password' type='password' onChange={this.setPassword.bind(this)}
                      value={this.state.password} placeholder='请输入密码'/>
           </View>
-          <AtButton size={"small"} type={"primary"} formType="submit" onClick={this.login.bind(this)}
-                    loading={this.state.loading}>登录</AtButton>
-          <AtButton size={"small"} type={"secondary"} onClick={this.toRegister.bind(this)}>还没有账户，点击注册</AtButton>
-          <AtMessage/>
         </View>
+        <View style='display: flex;justify-content: center;align-items: center;' className='at-row'>
+          <View className='at-col'>
+            <AtButton type={"primary"} formType="submit" onClick={this.login.bind(this)}
+                      loading={this.state.loading}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</AtButton>
+          </View>
+          <View className='at-col' style='margin-left: 3vh'>
+            <AtButton type={"secondary"} onClick={this.toRegister.bind(this)}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</AtButton>
+          </View>
+        </View>
+
+        <View style='margin-top: 8vh'>
+          <AtDivider customStyle='height: 60%' content='第三方登录' fontSize={27} fontColor={'#949494'}/>
+          <AtGrid data={
+            [
+              {
+                image: wechat,
+                value: '微信'
+              },
+              {
+                image: qq,
+                value: 'QQ'
+              },
+              {
+                image: weibo,
+                value: '微博'
+              }
+            ]
+          }
+                  hasBorder={false}/>
+        </View>
+        <AtMessage/>
+
       </View>
     )
   }

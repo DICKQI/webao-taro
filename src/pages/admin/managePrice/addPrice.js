@@ -3,6 +3,7 @@ import {View, Text} from '@tarojs/components'
 import {AtForm, AtButton, AtInput, AtSwitch, AtRate} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../../config/loginSave'
+import '../../users/dashboard.scss'
 
 export default class addPrice extends Component {
 
@@ -30,7 +31,6 @@ export default class addPrice extends Component {
   }
 
   setGrade(e) {
-    console.log(e);
     this.setState({
       grade: e
     })
@@ -80,7 +80,7 @@ export default class addPrice extends Component {
 
   render() {
     return (
-      <View>
+      <View className='userInfo'>
 
         <AtInput title='奖品名称' name='name' value={this.state.name} onChange={this.setName.bind(this)}
                  placeholder='请输入商品名称'/>
@@ -94,8 +94,8 @@ export default class addPrice extends Component {
             size={20}
           />
         </View>
-        <AtSwitch title='启用' checked={false} border={false} onChange={this.setIs_use.bind(this)}/>
-        <AtButton type={"secondary"} formType='submit' onClick={this.addPrice.bind(this)}>提交</AtButton>
+        <AtSwitch title={'启用   '} checked={false} border={false} onChange={this.setIs_use.bind(this)}/>
+        <AtButton type={"primary"} formType='submit' onClick={this.addPrice.bind(this)}>提交</AtButton>
 
       </View>
     );

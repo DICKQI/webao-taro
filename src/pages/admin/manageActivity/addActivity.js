@@ -42,6 +42,13 @@ export default class addActivity extends Component {
   }
 
   addActivity() {
+    if (this.state.description === '' || this.state.name === '') {
+      Taro.atMessage({
+        'message': '描述和标题都不能为空噢',
+        'type': 'warning'
+      });
+      return
+    }
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/activity',
       method: "POST",

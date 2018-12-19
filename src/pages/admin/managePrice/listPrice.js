@@ -105,7 +105,7 @@ export default class listPrice extends Component {
       <View>
         {
           this.state.priceList.map(item => {
-            return <View style='margin: 3vh 0;'><AtButton type={"secondary"} onClick={this.checkPrice.bind(this, item.id)}> {item.name}</AtButton></View>
+            return <View style='margin: 3vh 5%;'><AtButton type={"secondary"} onClick={this.checkPrice.bind(this, item.id)}> {item.name}</AtButton></View>
           })
         }
         {
@@ -123,10 +123,10 @@ export default class listPrice extends Component {
               <View>可用库存数：{this.state.available}</View>
             </View>
             <View className='at-row'>
-              <View className='at-col'>
+              <View className='at-col' style='margin: 0% 5%'>
                 <AtButton type={"secondary"} onClick={this.deletePrice.bind(this, this.state.id )}>删除该奖品</AtButton>
               </View>
-              <View className='at-col'>
+              <View className='at-col' style='margin: 0% 5%'>
                 <AtButton type={"secondary"} onClick={this.toChange.bind(this, this.state.id)}>修改这个商品</AtButton>
               </View>
             </View>

@@ -1,11 +1,10 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image, Swiper, SwiperItem} from '@tarojs/components'
-import {AtCurtain, AtGrid, AtSearchBar, AtDivider, AtCard} from 'taro-ui'
+import {AtGrid, AtSearchBar, AtDivider, AtCard, AtNoticebar} from 'taro-ui'
 import './index.scss'
 import img1 from '../../static/1.jpeg'
 import img2 from '../../static/2.jpeg'
-import img3 from '../../static/3.png'
-import curtainImg from '../../static/curtain.png'
+import save from "../../config/loginSave";
 
 
 export default class Index extends Component {
@@ -13,19 +12,20 @@ export default class Index extends Component {
   constructor() {
     super(...arguments);
     this.state = {
-      isOpened: false,
       activity: [],
-      searchContent: ''
+      searchValue: '',
+      userList: [],
+      luckyDog: {}
     }
   }
 
-  setSearchContent(e) {
+  setSearchValue(e) {
     this.setState({
-      searchContent: e
+      searchValue: e
     })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/activity/list'
     }).then(res => {
@@ -35,22 +35,58 @@ export default class Index extends Component {
         });
       }
     });
-    setTimeout(() => {
-      this.openCurtain()
-    }, 3000)
-  }
-
-  openCurtain() {
-    this.setState({
-      isOpened: true
+    Taro.request({
+      url: 'https://www.r-share.cn/webao_war/account/list',
+      header: {
+        'Cookie': save.MyLoginSessionID
+      }
+    }).then(res => {
+      this.setState({
+        luckyDog: {
+          username: '121',
+          reward: 'java高级编程教材一本'
+        }
+      });
+      if (res.statusCode === 200) {
+        for (var i = 0; i < res.data.length; i++) {
+          this.state.userList.push(res.data[i].id);
+          this.setState({
+            userList: this.state.userList
+          })
+        }
+        setInterval(() => {
+          var index = Math.floor(Math.random() * (res.data.length - 1 + 1));
+          var id = res.data[index].id;
+          Taro.request({
+            url: 'https://www.r-share.cn/webao_war/account/prizeRecord?account_id=' + id,
+            header: {
+              'Cookie': save.MyLoginSessionID
+            }
+          }).then(luck => {
+            if (luck.statusCode === 200) {
+              var priceIndex = Math.floor(Math.random() * (luck.data.length - 1 + 1));
+              Taro.request({
+                url: 'https://www.r-share.cn/webao_war/account?id=' + id,
+                header: {
+                  'Cookie': save.MyLoginSessionID
+                }
+              }).then(luckU => {
+                if (luckU.statusCode === 200) {
+                  this.setState({
+                    luckyDog: {
+                      username: luckU.data[0].username,
+                      reward: luck.data[priceIndex].reward.name
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }, 6000)
+      }
     })
   }
 
-  closeCurtain() {
-    this.setState({
-      isOpened: false
-    })
-  }
 
   toAcDetail(mid) {
     Taro.navigateTo({
@@ -65,26 +101,21 @@ export default class Index extends Component {
   render() {
     return (
       <View>
-        <AtSearchBar value={this.state.serarchContent} onChange={this.setSearchContent.bind(this)}/>
-        <AtCurtain isOpened={this.state.isOpened} onClose={this.closeCurtain.bind(this)} closeBtnPosition={'top'}>
-          <Image style='width:100%;height:250px' src={curtainImg}/>
-        </AtCurtain>
-        <View className='toCenter'>
+        <AtSearchBar value={this.state.searchValue} onChange={this.setSearchValue.bind(this)}/>
+        <AtNoticebar marquee icon='volume-plus'>恭喜{this.state.luckyDog.username}获得{this.state.luckyDog.reward}</AtNoticebar>
+        <View style='text-align: center;'>
           <Swiper
             indicatorColor='#999'
             indicatorActiveColor='#333'
             vertical={false}
-            circular={true}
-            indicatorDots
+            indicatorDots={false}
+            skipHiddenItemLayout
             autoplay>
             <SwiperItem>
-              <View><Image src={img1}/></View>
+              <View><Image mode={"widthFix"} src={img1}/></View>
             </SwiperItem>
             <SwiperItem>
-              <View><Image src={img2}/></View>
-            </SwiperItem>
-            <SwiperItem>
-              <View><Image src={img3}/></View>
+              <View><Image mode={"widthFix"} src={img2}/></View>
             </SwiperItem>
           </Swiper>
         </View>
@@ -124,7 +155,7 @@ export default class Index extends Component {
         {
           this.state.activity.map(item => {
             return <View className='margin'>
-              <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
+              <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name + (item.lottery ? '(已开奖)' : '')}
                       extra={'发起人：' + item.author.username}>
                 抽奖详情：。。。。。。
               </AtCard>

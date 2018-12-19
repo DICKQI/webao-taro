@@ -1,7 +1,11 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
-import {AtForm, AtButton, AtInput, AtMessage} from 'taro-ui'
+import {AtForm, AtButton, AtInput, AtMessage, AtDivider, AtGrid} from 'taro-ui'
 import save from '../../config/loginSave'
+import '../users/dashboard.scss'
+import wechat from "../../static/wechat.png";
+import qq from "../../static/qq.png";
+import weibo from "../../static/weibo.png";
 
 export default class register extends Component {
   config = {
@@ -61,11 +65,36 @@ export default class register extends Component {
   render() {
     return (
       <View>
-        <AtInput title='用户名' name='username' type='number' placeholder='请输入用户名' value={this.state.user}
-                 onChange={this.setUsername.bind(this)}/>
-        <AtInput title='密码' name='password' type='password' placeholder='请输入密码' value={this.state.password}
-                 onChange={this.setPassword.bind(this)}/>
-        <AtButton type={"primary"} formType='submit' onClick={this.register.bind(this)}>注册</AtButton>
+        <View className='userInfo' style='margin-top: 25%;'>
+          <View style='text-align:center;margin-bottom: 3vh;'>欢迎加入我们的世界</View>
+          <AtInput title='用户名' name='username' placeholder='请输入用户名' value={this.state.username}
+                   onChange={this.setUsername.bind(this)}/>
+          <AtInput title='密码' name='password' type='password' placeholder='请输入密码' value={this.state.password}
+                   onChange={this.setPassword.bind(this)}/>
+        </View>
+        <View style='display: flex;justify-content: center;align-items: center;margin-top:3vh'>
+          <AtButton type={"primary"} formType='submit' onClick={this.register.bind(this)}>注册</AtButton>
+        </View>
+        <View style='margin-top: 28vh'>
+          <AtDivider customStyle='height: 60%' content='第三方登录' fontSize={27} fontColor={'#949494'}/>
+          <AtGrid data={
+            [
+              {
+                image: wechat,
+                value: '微信'
+              },
+              {
+                image: qq,
+                value: 'QQ'
+              },
+              {
+                image: weibo,
+                value: '微博'
+              }
+            ]
+          }
+                  hasBorder={false}/>
+        </View>
         <AtMessage/>
       </View>
     )

@@ -20,7 +20,9 @@ export default class activityDetail extends Component {
       reward: [],
       description: '',
       p_number: 0,
-      id: ''
+      id: '',
+      lottery: false,
+      result: []
     })
   }
 
@@ -54,12 +56,32 @@ export default class activityDetail extends Component {
           name: res.data[0].name,
           description: res.data[0].description,
           p_number: res.data[0].p_number,
-          id: res.data[0].id
+          id: res.data[0].id,
+          lottery: res.data[0].lottery
         })
       } else {
         Taro.atMessage({
           'message': res.data[0].msg,
           'type': 'error'
+        })
+      }
+      if (res.data[0].lottery === true) {
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/luckdraw/record?id=' + res.data[0].id,
+          header: {
+            'Cookie': save.MyLoginSessionID
+          }
+        }).then(res => {
+          if (res.statusCode === 200) {
+            this.setState({
+              result: res.data
+            })
+          } else {
+            Taro.atMessage({
+              'message': res.data[0].msg,
+              'type': 'error'
+            })
+          }
         })
       }
     })
@@ -93,7 +115,6 @@ export default class activityDetail extends Component {
         <AtNavBar
           title={this.state.name}
         />
-        <AtNoticebar marquee icon='volume-plus'/>
         <View style='margin: 3vh 0;'>
           <AtCard title='本次活动的奖品' extra={'发起人:' + this.state.author.username}>
             {
@@ -113,16 +134,26 @@ export default class activityDetail extends Component {
           {this.state.description}
         </View>
         {
-
-          <View className='userInfo'>
-            <AtButton size={"small"} type={"primary"} onClick={this.joinInActivity.bind(this, this.state.id)}>
-              参加抽奖
-            </AtButton>
-          </View>
+          this.state.lottery ? <View className='userInfo'>
+              抽奖结果
+              {
+                this.state.result.map(item => {
+                  return <View style='margin-top: 2vh 0;color:red;' className='at-article__h1'>
+                    恭喜{item.account.username}获得{item.reward.name}
+                  </View>
+                })
+              }
+            </View> :
+            <View
+              style='margin-top:10vh;' className='userInfo'>
+              <AtButton type={"primary"} onClick={this.joinInActivity.bind(this, this.state.id)}>
+                参加抽奖
+              </AtButton>
+              <View style='margin-top:1vh'>
+                当前参与人数：{this.state.p_number}
+              </View>
+            </View>
         }
-        <View className='userInfo'>
-          当前参与人数：{this.state.p_number}
-        </View>
         <AtMessage/>
       </View>
     )

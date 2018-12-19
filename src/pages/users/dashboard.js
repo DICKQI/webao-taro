@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Text} from '@tarojs/components'
+import {View} from '@tarojs/components'
 import {AtButton, AtMessage, AtAvatar, AtGrid, AtActionSheet, AtActionSheetItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
@@ -28,7 +28,7 @@ export default class dashboard extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/account',
       method: "GET",
@@ -133,6 +133,7 @@ export default class dashboard extends Component {
     }
   };
 
+
   newActivity() {
     Taro.navigateTo({
       url: '/pages/admin/manageActivity/addActivity'
@@ -149,7 +150,7 @@ export default class dashboard extends Component {
                 <AtAvatar className='at-row__align-content--end' circle size={"large"}
                           image='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544496842193&di=bb5d519e49746f85df5e6c7921016f59&imgtype=0&src=http%3A%2F%2Fs9.rr.itc.cn%2Fr%2FwapChange%2F20171_18_16%2Fa9i5ff9624017280331.jpg'>
                 </AtAvatar>
-                <View style='margin: 2vh 0;'>欢迎{this.state.username}</View>
+                <View style='margin: 1vh 0;'>欢迎{this.state.username}</View>
                 <View style='margin: 2vh 0;'>用户组：{this.state.userRole}</View>
               </View>
 
@@ -216,7 +217,7 @@ export default class dashboard extends Component {
             新增奖品
           </AtActionSheetItem>
           <AtActionSheetItem onClick={this.toList.bind(this)}>
-            商品列表
+            奖品列表
           </AtActionSheetItem>
         </AtActionSheet>
       </View>

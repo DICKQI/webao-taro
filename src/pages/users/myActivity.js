@@ -46,7 +46,7 @@ export default class myActivity extends Component {
         <AtNavBar>我参加的活动</AtNavBar>
         {
           this.state.activity.map(item => {
-            return <View>
+            return <View style='margin: 3vh 3%'>
               <AtCard onClick={this.toDetail.bind(this, item.id)} title={item.name}>
                 {item.description}
               </AtCard>

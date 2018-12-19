@@ -15,7 +15,7 @@ export default class addReward extends Component {
       rewardName: [],
       choose: false,
       id: '',
-      number: '',
+      number: 1,
       available: ''
     };
   }
@@ -100,22 +100,27 @@ export default class addReward extends Component {
   render() {
     return (
       <View>
+        <View style='text-align:center;'>当前已选中的商品及其数量</View>
         <AtTextarea count={false} value={this.state.rewardName} disabled={true}/>
-        {
-          this.state.price.map(item => {
-            return <View onClick={this.openFloat.bind(this, item.id, item.name, item.available)}>
-              奖品名：{item.name} 可用数量：{item.available}
-            </View>
-          })
-        }
-        <AtFloatLayout title='请选择数量' isOpened={this.state.choose}>
-          <AtInputNumber type={"number"} max={this.state.available} min={1} step={1} value={this.state.number}
-                         onChange={this.setNumber.bind(this)}/>
-          <AtButton onClick={this.setReward.bind(this)}>确认</AtButton>
-        </AtFloatLayout>
         <View className='userInfo'>
+          <View style='margin-top:3vh'>点击奖品名后可以添加</View>
+          {
+
+            this.state.price.map(item => {
+              return <View onClick={this.openFloat.bind(this, item.id, item.name, item.available)} style='margin: 1vh 0'>
+                奖品名：{item.name} 可用数量：{item.available}
+              </View>
+            })
+          }
           <AtButton type={"primary"} size={"small"} onClick={this.addReward.bind(this)}>确认添加</AtButton>
         </View>
+        <AtFloatLayout title='请选择数量' isOpened={this.state.choose}>
+          <View className='userInfo' style='margin: 3vh 3vh'>
+            <AtInputNumber type={"number"} max={this.state.available} min={1} step={1} value={this.state.number}
+                           onChange={this.setNumber.bind(this)}/>
+          </View>
+          <AtButton onClick={this.setReward.bind(this)}>确认</AtButton>
+        </AtFloatLayout>
         <AtMessage/>
       </View>
     );

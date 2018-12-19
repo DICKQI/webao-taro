@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
+import {AtNavBar} from 'taro-ui'
 
 import './app.scss'
 
@@ -34,7 +35,7 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'webao',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
     },
     tabBar:{
       color: "#626567",
@@ -66,7 +67,7 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Index/>
     )
   }
 }
