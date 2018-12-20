@@ -87,7 +87,7 @@ export default class MyLogin extends Component {
           <View style='margin-top: 3vh'>
             <Image mode={"widthFix"} src={pig} style='width: 25vh; height:25vh'/>
           </View>
-          <View style='margin: 10vh 0;'>
+          <View style='margin-top: 10vh; margin-bottom: 3vh'>
             <AtInput title='用户名' name='username' type='text' onChange={this.setUsername.bind(this)}
                      value={this.state.username} placeholder='请输入用户名'/>
             <AtInput title='密码' name='password' type='password' onChange={this.setPassword.bind(this)}
@@ -104,7 +104,7 @@ export default class MyLogin extends Component {
           </View>
         </View>
 
-        <View style='margin-top: 8vh'>
+        <View style='margin-top: 14vh'>
           <AtDivider customStyle='height: 60%' content='第三方登录' fontSize={27} fontColor={'#949494'}/>
           <AtGrid data={
             [

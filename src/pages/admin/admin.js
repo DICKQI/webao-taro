@@ -107,11 +107,18 @@ export default class admin extends Component {
         this.setState({
           sureDeleteUser: false
         });
-        setTimeout(() => {
-          Taro.reLaunch({
-            url: '/pages/users/dashboard'
-          })
-        }, 1500)
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/account/list',
+          header: {
+            'Cookie': save.MyLoginSessionID
+          }
+        }).then(res => {
+          if (res.statusCode === 200) {
+            this.setState({
+              userList: res.data
+            })
+          }
+        });
       } else {
         Taro.showModal({
           'message': res.data[0].msg,
@@ -263,8 +270,8 @@ export default class admin extends Component {
         <AtModal title='请谨慎操作' content={'你确定要删除' + this.state.username + '吗？'} isOpened={this.state.sureDeleteUser}
                  onConfirm={this.deleteUser.bind(this, this.state.id)} onCancel={this.cancelDelete.bind(this)}
                  confirmText='确认删除' cancelText='取消'/>
-          <AtMessage/>
+        <AtMessage/>
       </View>
-  )
+    )
   }
-  }
+}

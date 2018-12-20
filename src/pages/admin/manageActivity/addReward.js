@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
-import {AtButton, AtInput, AtTextarea, AtMessage, AtInputNumber, AtCard, AtFloatLayout} from 'taro-ui'
+import {AtButton, AtTextarea, AtMessage, AtInputNumber, AtFloatLayout} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../../config/loginSave'
 import '../../users/dashboard.scss'
@@ -21,9 +21,9 @@ export default class addReward extends Component {
   }
 
   componentWillMount() {
-    // 获取奖品列表
+    // 获取奖品列表 默认为只显示已启用的奖品
     Taro.request({
-      url: 'https://www.r-share.cn/webao_war/prize/list',
+      url: 'https://www.r-share.cn/webao_war/prize/list?all=0',
       header: {
         'Cookie': save.MyLoginSessionID
       }
@@ -45,7 +45,6 @@ export default class addReward extends Component {
       reward: this.state.reward,
       choose: false
     });
-    console.log(this.state.reward)
   }
 
   setNumber(e) {

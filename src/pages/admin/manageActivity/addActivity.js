@@ -63,9 +63,9 @@ export default class addActivity extends Component {
     }).then(res => {
       if (res.statusCode === 200) {
         Taro.redirectTo({
-          url:'/pages/admin/manageActivity/addReward?id=' + res.data[0].id
+          url: '/pages/admin/manageActivity/addReward?id=' + res.data[0].id
         })
-    } else {
+      } else {
         Taro.atMessage({
           'message': res.data[0].msg,
           'type': 'error'
@@ -82,13 +82,13 @@ export default class addActivity extends Component {
                    placeholder='请输入抽奖活动名'/>
         </View>
         <View style='margin: 10px'>
-        <AtTextarea value={this.state.description} onChange={this.setDescription.bind(this)}
-                    maxlength='200' placeholder='请输入抽奖描述'/>
+          <AtTextarea value={this.state.description} onChange={this.setDescription.bind(this)}
+                      maxlength='200' placeholder='请输入抽奖描述'/>
         </View>
         <View style='margin-left:10px;margin-right: 10px'>
-        <AtButton type={"primary"} onClick={this.addActivity.bind(this)}>
-          创建
-        </AtButton>
+          <AtButton type={"primary"} onClick={this.addActivity.bind(this)}>
+            创建
+          </AtButton>
         </View>
         <AtMessage/>
       </View>

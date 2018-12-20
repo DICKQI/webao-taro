@@ -1,9 +1,10 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View} from '@tarojs/components'
-import {AtButton, AtMessage, AtCard, AtNavBar, AtNoticebar} from 'taro-ui'
+import {View, Image} from '@tarojs/components'
+import {AtButton, AtMessage, AtCard, AtNavBar, AtNoticebar, AtCurtain} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../users/dashboard.scss'
+import luck from '../../static/luck.png'
 
 export default class activityDetail extends Component {
 
@@ -22,11 +23,16 @@ export default class activityDetail extends Component {
       p_number: 0,
       id: '',
       lottery: false,
-      result: []
+      result: [],
+      myLuck: false,
+
+      apid: '',
+      joinUser: 'dk',
+      openNotice: false
     })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     // 检查是否已经登录
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/account/list',
@@ -75,7 +81,38 @@ export default class activityDetail extends Component {
           if (res.statusCode === 200) {
             this.setState({
               result: res.data
-            })
+            });
+            for (var i = 0; i < res.data.length; i++) {
+              if (res.data[i].account.id === save.MyID) {
+                console.log(0);
+                var uid = res.data[i].account.id;
+                Taro.request({
+                  url: 'https://www.r-share.cn/webao_war/account/prizeRecord?prize_id=' + res.data[i].reward.id,
+                  header: {
+                    'Cookie': save.MyLoginSessionID
+                  }
+                }).then(result => {
+                  setTimeout(() => {
+                    for (var j = 0; j < result.data.length; j++) {
+                      if (result.data[j].author === uid) {
+                        if (result.data[j].exchange === false) {
+                          var activity = result.data[j].activity;
+                          var cid = parseInt(this.$router.params.id);
+                          if (activity === cid) {
+                          console.log(3);
+                            this.setState({
+                              myLuck: true,
+                              apid: result.data[j].id
+                            });
+                            return
+                          }
+                        }
+                      }
+                    }
+                  }, 1200);
+                })
+              }
+            }
           } else {
             Taro.atMessage({
               'message': res.data[0].msg,
@@ -83,8 +120,50 @@ export default class activityDetail extends Component {
             })
           }
         })
+      } else {
+        this.setState({
+          openNotice: true
+        });
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/activity/account?id=' + this.$router.params.id,
+          header: {
+            'Cookie': save.MyLoginSessionID
+          }
+        }).then(res=>{
+          if (res.statusCode === 200) {
+            this.setState({
+              openNotice: true,
+            });
+            setInterval(()=>{
+              var index = Math.floor(Math.random() * (res.data[0].data.length - 1 + 1));
+              this.setState({
+                joinUser: res.data[0].data[index]
+              })
+            }, 6000)
+          }
+        })
       }
     })
+  }
+
+  luckDraw() {
+    Taro.request({
+      url: 'https://www.r-share.cn/webao_war/luckdraw?id=' + this.state.apid,
+      header: {
+        'Cookie': save.MyLoginSessionID
+      }
+    }).then(res => {
+      if (res.statusCode === 200) {
+        this.setState({
+          myLuck: false
+        });
+        Taro.atMessage({
+          'message': '兑奖成功!!!!',
+          'type': 'success'
+        })
+      }
+    })
+
   }
 
   joinInActivity(mid) {
@@ -99,6 +178,9 @@ export default class activityDetail extends Component {
           'message': '祝好运呢！！！',
           'type': 'success'
         });
+        this.setState({
+          p_number: this.state.p_number + 1
+        })
 
       } else {
         Taro.atMessage({
@@ -112,6 +194,13 @@ export default class activityDetail extends Component {
   render() {
     return (
       <View>
+        <AtCurtain onClose={this.luckDraw.bind(this)} isOpened={this.state.myLuck}>
+          <Image mode={"widthFix"} src={luck}/>
+        </AtCurtain>
+        {
+          this.state.openNotice ?
+           <AtNoticebar icon='volume-plus' marquee>欢迎{this.state.joinUser}参加抽奖</AtNoticebar> : ''
+        }
         <AtNavBar
           title={this.state.name}
         />

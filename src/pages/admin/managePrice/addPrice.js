@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Text} from '@tarojs/components'
-import {AtForm, AtButton, AtInput, AtSwitch, AtRate} from 'taro-ui'
+import {View} from '@tarojs/components'
+import { AtButton, AtInput, AtSwitch, AtRate} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../../config/loginSave'
 import '../../users/dashboard.scss'
@@ -80,13 +80,13 @@ export default class addPrice extends Component {
 
   render() {
     return (
-      <View className='userInfo'>
-
-        <AtInput title='奖品名称' name='name' value={this.state.name} onChange={this.setName.bind(this)}
-                 placeholder='请输入商品名称'/>
-        <AtInput title='库存量' name='stock' value={this.state.stock} onChange={this.setStock.bind(this)}
-                 placeholder='请输入库存量'/>
-        <View style='text-align: center'>奖品等级
+      <View>
+        <View className='userInfo'>
+          <AtInput title='奖品名称' name='name' value={this.state.name} onChange={this.setName.bind(this)}
+                   placeholder='请输入商品名称'/>
+          <AtInput title='库存量' name='stock' value={this.state.stock} onChange={this.setStock.bind(this)}
+                   placeholder='请输入库存量'/>
+          奖品等级
           <AtRate
             value={this.state.grade}
             onChange={this.setGrade.bind(this)}
@@ -94,9 +94,10 @@ export default class addPrice extends Component {
             size={20}
           />
         </View>
-        <AtSwitch title={'启用   '} checked={false} border={false} onChange={this.setIs_use.bind(this)}/>
-        <AtButton type={"primary"} formType='submit' onClick={this.addPrice.bind(this)}>提交</AtButton>
-
+        <View style='margin-left: 3vh;margin-right:3vh;margin-top:1vh;'>
+          <AtSwitch title={'启用'} checked={false} border={false} onChange={this.setIs_use.bind(this)}/>
+          <AtButton type={"primary"} formType='submit' onClick={this.addPrice.bind(this)}>提交</AtButton>
+        </View>
       </View>
     );
   }

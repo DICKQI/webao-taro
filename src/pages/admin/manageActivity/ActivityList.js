@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Text} from '@tarojs/components'
-import {AtButton, AtMessage, AtAvatar, AtGrid, AtCard, AtNavBar, AtNoticebar, AtFloatLayout} from 'taro-ui'
+import {View} from '@tarojs/components'
+import {AtButton, AtMessage, AtCard, AtFloatLayout} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../../config/loginSave'
 import '../../users/dashboard.scss'
@@ -140,12 +140,38 @@ export default class ActivityList extends Component {
           'message': '删除活动成功',
           'type': 'success'
         });
-        setTimeout(() => {
-          Taro.reLaunch({
-            url: '/pages/users/dashboard'
-          })
-        }, 1500)
+        this.setState({
+          choose: false,
+          activityDetail: '',
+          activityId: '',
+          activityName: '',
+          p_number: '',
+          reward: [],
+        });
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/activity/list',
+        }).then(res => {
+          if (res.statusCode === 200) {
+            this.setState({
+              activityList: res.data
+            });
+          } else {
+            Taro.atMessage({
+              'message': res.data[0].msg,
+              'type': 'error'
+            })
+          }
+        });
       }
+    })
+  }
+
+  toEditActivity(mid) {
+    this.setState({
+      choose: false
+    });
+    Taro.navigateTo({
+      url: '/pages/admin/manageActivity/editActivity?id=' + mid
     })
   }
 
@@ -203,9 +229,17 @@ export default class ActivityList extends Component {
                 </View>
               </View>
           }
-          <View className='userInfo' style='margin-top: 1vh'>
-            <AtButton type={"primary"} size={"small"}
-                      onClick={this.deleteActivity.bind(this, this.state.activityId)}>删除该活动</AtButton>
+          <View className='userInfo'>
+            <View style='margin-top: 1vh'>
+              <AtButton type={"primary"} size={"small"}
+                        onClick={this.deleteActivity.bind(this, this.state.activityId)}>删除该活动</AtButton>
+            </View>
+            <View style='margin-top: 1vh'>
+              <AtButton type={"primary"} size={"small"}
+                        onClick={this.toEditActivity.bind(this, this.state.activityId)}>
+                修改活动信息
+              </AtButton>
+            </View>
           </View>
           <AtMessage/>
         </AtFloatLayout>

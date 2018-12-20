@@ -101,8 +101,12 @@ export default class Index extends Component {
   render() {
     return (
       <View>
+        {/*<AtCurtain onClose={this.closeCurtain.bind(this)} isOpened={this.state.curtain} >*/}
+        {/*<Image mode={"widthFix"} src={luck}/>*/}
+        {/*</AtCurtain>*/}
         <AtSearchBar value={this.state.searchValue} onChange={this.setSearchValue.bind(this)}/>
-        <AtNoticebar marquee icon='volume-plus'>恭喜{this.state.luckyDog.username}获得{this.state.luckyDog.reward}</AtNoticebar>
+        <AtNoticebar marquee
+                     icon='volume-plus'>恭喜{this.state.luckyDog.username}获得{this.state.luckyDog.reward}</AtNoticebar>
         <View style='text-align: center;'>
           <Swiper
             indicatorColor='#999'
@@ -157,7 +161,12 @@ export default class Index extends Component {
             return <View className='margin'>
               <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name + (item.lottery ? '(已开奖)' : '')}
                       extra={'发起人：' + item.author.username}>
-                抽奖详情：。。。。。。
+                <View className='at-article__p' style='text-align: center;'>
+                  当前参与人数:{item.p_number}
+                </View>
+                <View>
+                  {item.description}
+                </View>
               </AtCard>
             </View>
           })

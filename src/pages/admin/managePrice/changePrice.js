@@ -1,9 +1,10 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
-import {AtButton, AtMessage, AtRate, AtInput, AtForm, AtSwitch} from 'taro-ui'
+import {AtButton, AtMessage, AtRate, AtInput, AtSwitch} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../../config/loginSave'
 import '../../index/index.scss'
+import '../../users/dashboard.scss'
 
 export default class changePrice extends Component {
 
@@ -115,11 +116,12 @@ export default class changePrice extends Component {
   render() {
     return (
       <View>
-
-        <AtInput title='奖品名称' name='name' onChange={this.changeName.bind(this)} value={this.state.name}/>
-        <AtInput title='库存量' name='stock' onChange={this.changeStock.bind(this)} value={this.state.stock}/>
-        <AtInput title='可用量' name='available' onChange={this.changeAvailable.bind(this)}
-                 value={this.state.available}/>
+        <View className='userInfo'>
+          <AtInput title='奖品名称' name='name' onChange={this.changeName.bind(this)} value={this.state.name}/>
+          <AtInput title='库存量' name='stock' onChange={this.changeStock.bind(this)} value={this.state.stock}/>
+          <AtInput title='可用量' name='available' onChange={this.changeAvailable.bind(this)}
+                   value={this.state.available}/>
+        </View>
         <View className='toCenter'>
           <Text>奖品等级</Text>
           <AtRate
@@ -128,9 +130,10 @@ export default class changePrice extends Component {
             max={5}
           />
         </View>
-        <AtSwitch title='是否启用奖品' checked={this.state.is_use} border={false} onChange={this.changeUse.bind(this)}/>
-        <AtButton type='primary' formType='submit' onClick={this.changePrice.bind(this)}>提交</AtButton>
-
+        <View style='margin-left: 3vh;margin-right:3vh;margin-top:1vh;'>
+          <AtSwitch title='是否启用奖品' checked={this.state.is_use} border={false} onChange={this.changeUse.bind(this)}/>
+          <AtButton type='primary' formType='submit' onClick={this.changePrice.bind(this)}>提交</AtButton>
+        </View>
         <AtMessage/>
       </View>
     );

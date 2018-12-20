@@ -28,6 +28,7 @@ class App extends Component {
       'pages/admin/manageActivity/addActivity',
       'pages/admin/manageActivity/ActivityList',
       'pages/admin/manageActivity/addReward',
+      'pages/admin/manageActivity/editActivity',
       'pages/Activity/activityDetail',
 
     ],
