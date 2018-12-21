@@ -137,12 +137,12 @@ export default class MyLogin extends Component {
           <View style='margin-top: 3vh'>
             <Image mode={"widthFix"} src={pig} style='width: 25vh; height:25vh'/>
           </View>
-          <View style='margin-top: 8vh; margin-bottom: 1vh;text-align: center'>
+          <View style='margin-top: 8vh; margin-bottom: 1vh;'>
             <AtInput title='用户名' name='username' type='text' onChange={this.setUsername.bind(this)}
                      value={this.state.username} placeholder='请输入用户名'/>
             <AtInput title='密码' name='password' type='password' onChange={this.setPassword.bind(this)}
                      value={this.state.password} placeholder='请输入密码'/>
-            <View style='color: gray;font-size: 12px;margin-top: 0.8vh'>没有账号的同学输入账密点击注册就行哦</View>
+            <View style='color: gray;font-size: 12px;margin-top: 0.8vh;text-align: center;'>没有账号的同学输入账密点击注册就行哦</View>
           </View>
         </View>
         <View style='display: flex;justify-content: center;align-items: center;' className='at-row'>

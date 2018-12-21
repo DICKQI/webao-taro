@@ -1,17 +1,19 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image} from '@tarojs/components'
-import {AtButton, AtMessage, AtCard, AtNoticebar, AtCurtain} from 'taro-ui'
+import {AtButton, AtMessage, AtCard, AtNoticebar, AtCurtain, AtFloatLayout} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../users/dashboard.scss'
 import luck from '../../static/luck.png'
 import divide from '../../static/divider.png'
 
+var flashTimer;
+
 export default class activityDetail extends Component {
 
 
   config = {
-    navigationBarTitleText: this.state.name
+    navigationBarTitleText: '活动详情'
   };
 
   constructor() {
@@ -28,9 +30,12 @@ export default class activityDetail extends Component {
       myLuck: false,
 
       apid: '',
-      joinUser: 'dk',
+      joinUser: '121',
       joinUserList: [],
-      openNotice: false
+      openNotice: false,
+
+      openFloat: false,
+      thisActivityUser: []
     })
   }
 
@@ -85,7 +90,6 @@ export default class activityDetail extends Component {
             });
             for (var i = 0; i < res.data.length; i++) {
               if (res.data[i].account.id === save.MyID) {
-                console.log(0);
                 var uid = res.data[i].account.id;
                 Taro.request({
                   url: 'https://www.r-share.cn/webao_war/account/prizeRecord?prize_id=' + res.data[i].reward.id,
@@ -100,7 +104,6 @@ export default class activityDetail extends Component {
                           var activity = result.data[j].activity;
                           var cid = parseInt(this.$router.params.id);
                           if (activity === cid) {
-                          console.log(3);
                             this.setState({
                               myLuck: true,
                               apid: result.data[j].id
@@ -137,16 +140,21 @@ export default class activityDetail extends Component {
               joinUserList: res.data[0].data,
               openNotice: true,
             });
-            setInterval(()=>{
+            flashTimer = setInterval(()=>{
               var index = Math.floor(Math.random() * (res.data[0].data.length - 1 + 1));
               this.setState({
                 joinUser: res.data[0].data[index]
-              })
+              });
+              console.log(1)
             }, 6000)
           }
         })
       }
     })
+  }
+
+  componentWillUnmount() {
+    clearInterval(flashTimer)
   }
 
   luckDraw() {
@@ -196,6 +204,18 @@ export default class activityDetail extends Component {
     })
   }
 
+  openUserFloat() {
+    this.setState({
+      openFloat: true
+    })
+  }
+
+  closeUserFloat() {
+    this.setState({
+      openFloat: false
+    })
+  }
+
   render() {
     return (
       <View>
@@ -206,9 +226,6 @@ export default class activityDetail extends Component {
           this.state.openNotice ?
            <AtNoticebar icon='volume-plus' marquee>欢迎{this.state.joinUser}参加抽奖</AtNoticebar> : ''
         }
-        {/*<AtNavBar*/}
-          {/*title={this.state.name}*/}
-        {/*/>*/}
         <View style='text-align: center;' className='at-article__p'>{this.state.name}</View>
         <View style='margin: 3vh 0;'>
           <AtCard title='本次活动的奖品' extra={'发起人:' + this.state.author.username}>
@@ -245,11 +262,22 @@ export default class activityDetail extends Component {
               <AtButton type={"primary"} onClick={this.joinInActivity.bind(this, this.state.id)}>
                 参加抽奖
               </AtButton>
-              <View style='margin-top:1vh'>
+              <View style='margin-top:1vh' onClick={this.openUserFloat.bind(this)}>
                 当前参与人数：{this.state.p_number}
               </View>
             </View>
         }
+        <View>
+          <AtFloatLayout title='参与人' isOpened={this.state.openFloat} onClose={this.closeUserFloat.bind(this)}>
+            {
+              this.state.joinUserList.map(item=>{
+                return <View style='text-align: center;font-size: 20px'>
+                    {item}
+                </View>
+              })
+            }
+          </AtFloatLayout>
+        </View>
         <AtMessage/>
       </View>
     )

@@ -225,21 +225,24 @@ export default class ActivityList extends Component {
               : <View>
                 <View className='userInfo' style='margin-top: 1vh'>
                   当前参与人数：{this.state.p_number}
-                  <AtButton type={"primary"} size={"small"} onClick={this.beginLuckDraw.bind(this)}>开始抽奖</AtButton>
+                  <View style='margin-top:1vh'>
+                    <AtButton type={"primary"} size={"small"} onClick={this.beginLuckDraw.bind(this)}>开始抽奖</AtButton>
+                  </View>
                 </View>
               </View>
           }
           <View className='userInfo'>
             <View style='margin-top: 1vh'>
               <AtButton type={"primary"} size={"small"}
-                        onClick={this.deleteActivity.bind(this, this.state.activityId)}>删除该活动</AtButton>
-            </View>
-            <View style='margin-top: 1vh'>
-              <AtButton type={"primary"} size={"small"}
                         onClick={this.toEditActivity.bind(this, this.state.activityId)}>
                 修改活动信息
               </AtButton>
             </View>
+            <View style='margin-top: 1vh'>
+              <AtButton type={"primary"} size={"small"}
+                        onClick={this.deleteActivity.bind(this, this.state.activityId)}>删除该活动</AtButton>
+            </View>
+
           </View>
           <AtMessage/>
         </AtFloatLayout>

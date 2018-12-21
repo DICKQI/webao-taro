@@ -14,7 +14,6 @@ export default class Index extends Component {
   constructor() {
     super(...arguments);
     this.state = {
-      // activity: [],
       searchValue: '',
       userList: [],
       luckyDog: {},
@@ -60,9 +59,6 @@ export default class Index extends Component {
       url: 'https://www.r-share.cn/webao_war/activity/list'
     }).then(res => {
       if (res.statusCode === 200) {
-        // this.setState({
-        //   activity: res.data
-        // });
         // 分配进去不同的数组
         for (var i = 0; i < res.data.length; i++) {
           if (res.data[i].lottery === true) {
@@ -168,13 +164,14 @@ export default class Index extends Component {
             indicatorActiveColor='#333'
             vertical={false}
             indicatorDots={false}
+            circular
             skipHiddenItemLayout
             autoplay>
             <SwiperItem>
-              <View><Image mode={"widthFix"} src={img1}/></View>
+              <View><Image style='width:100%;height:100%' mode={"widthFix"} src={img1}/></View>
             </SwiperItem>
             <SwiperItem>
-              <View><Image mode={"widthFix"} src={img2}/></View>
+              <View><Image style='width:100%;height:100%' mode={"widthFix"} src={img2}/></View>
             </SwiperItem>
           </Swiper>
         </View>

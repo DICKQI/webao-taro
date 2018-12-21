@@ -98,15 +98,18 @@ export default class addReward extends Component {
 
   render() {
     return (
-      <View>
+      <View style='color:gray;margin-top:10vh'>
         <View style='text-align:center;'>当前已选中的商品及其数量</View>
-        <AtTextarea count={false} value={this.state.rewardName} disabled={true}/>
+        <View style='margin-left: 2vh;margin-right: 2vh'>
+          <AtTextarea count={false} value={this.state.rewardName} disabled={true}/>
+        </View>
         <View className='userInfo'>
           <View style='margin-top:3vh'>点击奖品名后可以添加</View>
           {
 
             this.state.price.map(item => {
-              return <View onClick={this.openFloat.bind(this, item.id, item.name, item.available)} style='margin: 1vh 0'>
+              return <View onClick={this.openFloat.bind(this, item.id, item.name, item.available)}
+                           style='margin: 1vh 0'>
                 奖品名：{item.name} 可用数量：{item.available}
               </View>
             })

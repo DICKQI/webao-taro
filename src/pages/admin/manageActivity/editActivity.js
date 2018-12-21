@@ -113,11 +113,12 @@ export default class editActivity extends Component {
         data: [
           {
             id: this.state.rewardId,
-            number: this.state.rewardNumber
+            number: parseInt(this.state.rewardNumber)
           }
         ]
       }
     }).then(res => {
+      // 刷新活动
       if (res.statusCode === 200) {
         Taro.request({
           url: 'https://www.r-share.cn/webao_war/activity?id=' + this.state.id,
@@ -130,9 +131,15 @@ export default class editActivity extends Component {
               reward: res.data[0].reward,
               author: res.data[0].author.username,
               description: res.data[0].description,
-              name: res.data[0].name
+              name: res.data[0].name,
+              float: false
             })
           }
+        });
+        Taro.atMessage({
+          'message': '修改奖品成功',
+          'type': 'success',
+          'duration': 1000
         })
       } else {
         Taro.atMessage({
@@ -157,7 +164,46 @@ export default class editActivity extends Component {
 
   deleteReward() {
     Taro.request({
-      url: 'http://www.r-share.cn:8080/webao_war/activity/manage?'
+      url: 'https://www.r-share.cn/webao_war/activity/manage',
+      method: "DELETE",
+      header: {
+        'content-type': 'application/json',
+        'Cookie': save.MyLoginSessionID
+      },
+      data: {
+        ids: [
+          this.state.rewardId
+        ]
+      }
+    }).then(res => {
+      if (res.statusCode === 200) {
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/activity?id=' + this.state.id,
+          header: {
+            'Cookie': save.MyLoginSessionID
+          }
+        }).then(res => {
+          if (res.statusCode === 200) {
+            this.setState({
+              reward: res.data[0].reward,
+              author: res.data[0].author.username,
+              description: res.data[0].description,
+              name: res.data[0].name,
+              float: false
+            })
+          }
+        });
+        Taro.atMessage({
+          'message': '删除成功',
+          'type': 'success',
+          'duration': 1000
+        })
+      } else {
+        Taro.atMessage({
+          'message': res.data[0].msg,
+          'type': 'error'
+        })
+      }
     })
   }
 
@@ -215,8 +261,11 @@ export default class editActivity extends Component {
               <AtInputNumber type={"number"} value={this.state.rewardNumber} max={this.state.maxNumber} step={1} min={1}
                              onChange={this.setRewardNumber.bind(this)}/>
               <View style='text-align:center;margin-top: 1vh'>可用最多数量:{this.state.maxNumber}</View>
-              <View style='margin-top: 2vh'>
+              <View style='margin-top: 2vh;'>
                 <AtButton onClick={this.setReward.bind(this)} type={"primary"} size={"small"}>确认</AtButton>
+              </View>
+              <View style='margin-top: 2vh;'>
+                <AtButton onClick={this.deleteReward.bind(this)} type={"primary"} size={"small"}>删除</AtButton>
               </View>
             </View>
           </AtFloatLayout>

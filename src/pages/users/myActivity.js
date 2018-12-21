@@ -51,10 +51,9 @@ export default class myActivity extends Component {
   render() {
     return (
       <View>
-        <AtNavBar>我参加的活动</AtNavBar>
         {
           this.state.empty ?
-            <View style='text-align: center;color:gray;font-size: 20px'>
+            <View style='text-align: center;color:gray;font-size: 20px;margin-top: 70%'>
               你还没有参加任何活动呢，快去参加吧
             </View>
            : this.state.activity.map(item => {

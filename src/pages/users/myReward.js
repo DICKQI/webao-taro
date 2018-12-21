@@ -13,9 +13,14 @@ export default class myReward extends Component {
     this.state = {
       userReward: [],
       luckId: '',
-      openModal: false
+      openModal: false,
+      empty: false
     }
   }
+
+  config =  {
+    navigationBarTitleText: '我的中奖'
+  };
 
   closeModal() {
     this.setState({
@@ -31,9 +36,15 @@ export default class myReward extends Component {
       }
     }).then(res => {
       if (res.statusCode === 200) {
+        if (JSON.stringify(res.data) === '[]') {
+          this.setState({
+            empty: true
+          });
+          return
+        }
         this.setState({
           userReward: res.data
-        })
+        });
       }
     })
   }
@@ -90,15 +101,18 @@ export default class myReward extends Component {
         <AtModal content='确定要兑奖吗？' isOpened={this.state.openModal} onConfirm={this.luckDraw.bind(this)} confirmText='确定'
                  cancelText='取消' onCancel={this.closeModal.bind(this)} onClose={this.closeModal.bind(this)}/>
         {
-          this.state.userReward.map(item => {
-            return <View style='margin-top: 3vh;color:red;text-align:center'>
-              {item.reward.name}
-              {
-                item.exchange ? '~已兑奖~' : <View style='margin-top:1vh'><AtButton type={"primary"} size={"small"}
-                                                                                 onClick={this.checkReward.bind(this, item.id)}>兑奖</AtButton></View>
-              }
-            </View>
-          })
+          this.state.empty ? <View style='text-align: center;color: gray;font-size: 16px;margin-top: 70%'>
+              ~~你还没有任何的中奖奖品呢，快去参加活动吧~~
+            </View> :
+            this.state.userReward.map(item => {
+              return <View style='margin-top: 3vh;color:red;text-align:center'>
+                {item.reward.name}
+                {
+                  item.exchange ? '~已兑奖~' : <View style='margin-top:1vh'><AtButton type={"primary"} size={"small"}
+                                                                                   onClick={this.checkReward.bind(this, item.id)}>兑奖</AtButton></View>
+                }
+              </View>
+            })
         }
         <AtMessage/>
       </View>

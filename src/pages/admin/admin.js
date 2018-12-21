@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View, Text} from '@tarojs/components'
+import {View} from '@tarojs/components'
 import {AtMessage, AtCard, AtActionSheet, AtActionSheetItem, AtFloatLayout, AtModal} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
@@ -285,7 +285,7 @@ export default class admin extends Component {
   render() {
     return (
       <View className='at-article'>
-        <Text className='userInfo'>点击用户名查看当前用户信息</Text>
+        <View style='text-align: center;color: gray;margin-top:1.5vh'>点击用户名查看当前用户信息</View>
         {
           this.state.userList.map(item => {
             return <View onClick={this.checkId.bind(this, item.id)} className='margin'>

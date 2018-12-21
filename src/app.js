@@ -1,6 +1,9 @@
 import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
-import {AtNavBar} from 'taro-ui'
+import index from './static/index.png'
+import me from './static/me.png'
+import UnSelectIndex from './static/unSelectIndex.png'
+import UnSelectMe from './static/unSelectMe.png'
 
 import './app.scss'
 
@@ -47,11 +50,15 @@ class App extends Component {
       list:[
         {
           pagePath:'pages/index/index',
-          text:'首页'
+          text:'首页',
+          iconPath: UnSelectIndex,
+          selectedIconPath: index
         },
         {
           pagePath:'pages/users/dashboard',
-          text:'我的'
+          text:'我的',
+          iconPath: UnSelectMe,
+          selectedIconPath: me
         }
       ]
     }

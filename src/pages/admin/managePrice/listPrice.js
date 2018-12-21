@@ -155,11 +155,12 @@ export default class listPrice extends Component {
           </View>
           <View className='at-row'>
             <View className='at-col' style='margin: 2% 5%'>
-              <AtButton type={"secondary"} onClick={this.deletePrice.bind(this, this.state.id)}>删除该奖品</AtButton>
-            </View>
-            <View className='at-col' style='margin: 2% 5%'>
               <AtButton type={"secondary"} onClick={this.toChange.bind(this, this.state.id)}>修改这个商品</AtButton>
             </View>
+            <View className='at-col' style='margin: 2% 5%'>
+              <AtButton type={"secondary"} onClick={this.deletePrice.bind(this, this.state.id)}>删除该奖品</AtButton>
+            </View>
+
           </View>
         </AtFloatLayout>
 
