@@ -1,10 +1,11 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image} from '@tarojs/components'
-import {AtButton, AtMessage, AtCard, AtNavBar, AtNoticebar, AtCurtain} from 'taro-ui'
+import {AtButton, AtMessage, AtCard, AtNoticebar, AtCurtain} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../users/dashboard.scss'
 import luck from '../../static/luck.png'
+import divide from '../../static/divider.png'
 
 export default class activityDetail extends Component {
 
@@ -28,11 +29,12 @@ export default class activityDetail extends Component {
 
       apid: '',
       joinUser: 'dk',
+      joinUserList: [],
       openNotice: false
     })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // 检查是否已经登录
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/account/list',
@@ -43,10 +45,9 @@ export default class activityDetail extends Component {
       if (res.statusCode === 401) {
         Taro.navigateTo({
           url: '/pages/users/login'
-        })
+        });
       }
     });
-
     // 获取活动详情
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/activity?id=' + this.$router.params.id,
@@ -121,6 +122,7 @@ export default class activityDetail extends Component {
           }
         })
       } else {
+        // 未开奖的话就欢迎参与的人
         this.setState({
           openNotice: true
         });
@@ -132,6 +134,7 @@ export default class activityDetail extends Component {
         }).then(res=>{
           if (res.statusCode === 200) {
             this.setState({
+              joinUserList: res.data[0].data,
               openNotice: true,
             });
             setInterval(()=>{
@@ -147,6 +150,7 @@ export default class activityDetail extends Component {
   }
 
   luckDraw() {
+    // 兑奖
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/luckdraw?id=' + this.state.apid,
       header: {
@@ -167,6 +171,7 @@ export default class activityDetail extends Component {
   }
 
   joinInActivity(mid) {
+    // 参加抽奖！！
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/activity/join?id=' + mid,
       header: {
@@ -201,9 +206,10 @@ export default class activityDetail extends Component {
           this.state.openNotice ?
            <AtNoticebar icon='volume-plus' marquee>欢迎{this.state.joinUser}参加抽奖</AtNoticebar> : ''
         }
-        <AtNavBar
-          title={this.state.name}
-        />
+        {/*<AtNavBar*/}
+          {/*title={this.state.name}*/}
+        {/*/>*/}
+        <View style='text-align: center;' className='at-article__p'>{this.state.name}</View>
         <View style='margin: 3vh 0;'>
           <AtCard title='本次活动的奖品' extra={'发起人:' + this.state.author.username}>
             {
@@ -224,7 +230,8 @@ export default class activityDetail extends Component {
         </View>
         {
           this.state.lottery ? <View className='userInfo'>
-              抽奖结果
+              <View style='margin-bottom: 2vh;margin-top: 1vh'>抽奖结果</View>
+              <Image src={divide} style='width: 100%; height: 12vh'/>
               {
                 this.state.result.map(item => {
                   return <View style='margin-top: 2vh 0;color:red;' className='at-article__h1'>

@@ -19,8 +19,9 @@ class App extends Component {
       'pages/users/register',
       'pages/users/resetPassword',
       'pages/users/myActivity',
+      'pages/users/listPrice',
+      'pages/users/myReward',
       'pages/admin/admin',
-      'pages/admin/changeUser',
       'pages/admin/managePrice/manage',
       'pages/admin/managePrice/addPrice',
       'pages/admin/managePrice/listPrice',
@@ -30,13 +31,12 @@ class App extends Component {
       'pages/admin/manageActivity/addReward',
       'pages/admin/manageActivity/editActivity',
       'pages/Activity/activityDetail',
-
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#303030',
       navigationBarTitleText: 'webao',
-      navigationBarTextStyle: 'black',
+      navigationBarTextStyle: 'white',
     },
     tabBar:{
       color: "#626567",

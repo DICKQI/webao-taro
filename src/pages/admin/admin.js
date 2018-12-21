@@ -19,7 +19,7 @@ export default class admin extends Component {
       checkUser: false,
       checkUserActivity: false,
       username: '',
-      role: '',
+      role: false,
       id: '',
       userActivityList: [],
       checkUserReward: false,
@@ -59,9 +59,17 @@ export default class admin extends Component {
         this.setState({
           checkUser: true,
           username: res.data[0].username,
-          role: res.data[0].role,
           id: res.data[0].id
-        })
+        });
+        if (res.data[0].role === 'ADMIN') {
+          this.setState({
+            role: true
+          })
+        } else {
+          this.setState({
+            role: false
+          })
+        }
       }
     })
   }
@@ -147,12 +155,87 @@ export default class admin extends Component {
     })
   }
 
-  toChangePage(id, username, role) {
+  toChangePage() {
     this.setState({
       checkUser: false
     });
-    Taro.navigateTo({
-      url: '/pages/admin/changeUser?id=' + id + '&username=' + username + '&role=' + role,
+    Taro.request({
+      url: 'https://www.r-share.cn/webao_war/account/manage',
+      method: "PUT",
+      data: {
+        id: this.state.id,
+        username: this.state.username,
+        password: "123456"
+      },
+      header: {
+        'Cookie': save.MyLoginSessionID,
+        'content-type': 'application/json'
+      }
+    }).then(res => {
+      if (res.statusCode === 200) {
+        Taro.atMessage({
+          'message': '重置成功',
+          'type': 'success'
+        });
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/account/list',
+          header: {
+            'Cookie': save.MyLoginSessionID
+          }
+        }).then(res => {
+          if (res.statusCode === 200) {
+            this.setState({
+              userList: res.data,
+              checkUser: false
+            })
+          }
+        })
+      } else {
+        Taro.atMessage({
+          'message': res.data[0].msg,
+          'type': 'error'
+        })
+      }
+    })
+  }
+
+  changeAuthority(e) {
+    Taro.request({
+      url: 'https://www.r-share.cn/webao_war/account/manage',
+      method: "POST",
+      header: {
+        'Cookie': save.MyLoginSessionID,
+        'content-type': 'application/json'
+      },
+      data: {
+        id: this.state.id,
+        admin: e
+      }
+    }).then(res=>{
+      if (res.statusCode === 200) {
+        Taro.atMessage({
+          'message': '修改成功',
+          'type': 'success'
+        })
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/account/list',
+          header: {
+            'Cookie': save.MyLoginSessionID
+          }
+        }).then(res => {
+          if (res.statusCode === 200) {
+            this.setState({
+              userList: res.data,
+              checkUser: false
+            })
+          }
+        })
+      } else {
+        Taro.atMessage({
+          'message': res.data[0].msg,
+          'type': 'error'
+        })
+      }
     })
   }
 
@@ -227,15 +310,20 @@ export default class admin extends Component {
               删除该用户
             </AtActionSheetItem>
             <AtActionSheetItem
-              onClick={this.toChangePage.bind(this, this.state.id, this.state.username, this.state.role)}>
-              修改用户信息
+              onClick={this.toChangePage.bind(this)}>
+              重置用户密码为123456
             </AtActionSheetItem>
+            {
+              this.state.role ? <AtActionSheetItem onClick={this.changeAuthority.bind(this, false)}>将用户降级为USERS</AtActionSheetItem>
+                : <AtActionSheetItem onClick={this.changeAuthority.bind(this, true)}>将用户升级为ADMIN</AtActionSheetItem>
+            }
             <AtActionSheetItem onClick={this.UserActivity.bind(this, this.state.id)}>
               查看该用户参加的抽奖
             </AtActionSheetItem>
             <AtActionSheetItem onClick={this.userReward.bind(this, this.state.id)}>
               查看该用户的中奖情况
             </AtActionSheetItem>
+
           </AtActionSheet>
         </View>
         <View>

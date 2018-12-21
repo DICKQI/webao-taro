@@ -71,12 +71,16 @@ export default class resetPassword extends Component {
       if (res.statusCode === 200) {
         save.MyID = '';
         save.MyLoginSessionID = '';
-        Taro.reLaunch({
-          url: '/pages/users/login'
-        }).then(Taro.atMessage({
+        Taro.atMessage({
           'message': '修改成功，请重新登录',
           'type': 'success'
-        }))
+        });
+        setTimeout(() => {
+          Taro.reLaunch({
+            url: '/pages/users/login'
+          })
+        }, 1500)
+
       } else {
         Taro.atMessage({
           'message': res.data[0].msg,
@@ -95,7 +99,9 @@ export default class resetPassword extends Component {
                  value={this.state.oldPassword} placeholder='必填'/>
         <AtInput title='新密码' type='password' name='newPassword' onChange={this.setNewPassword.bind(this)}
                  value={this.state.newPassword} placeholder='必填'/>
+        <View style='margin-top: 2vh'>
         <AtButton type={"primary"} formType='submit' onClick={this.rePassword.bind(this)}>提交</AtButton>
+        </View>
         <AtMessage/>
       </View>
     )

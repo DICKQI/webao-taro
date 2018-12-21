@@ -1,22 +1,46 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image, Swiper, SwiperItem} from '@tarojs/components'
-import {AtGrid, AtSearchBar, AtDivider, AtCard, AtNoticebar} from 'taro-ui'
+import {AtGrid, AtSearchBar, AtDivider, AtCard, AtNoticebar, AtModal, AtTabs, AtTabsPane} from 'taro-ui'
 import './index.scss'
 import img1 from '../../static/1.jpeg'
 import img2 from '../../static/2.jpeg'
 import save from "../../config/loginSave";
 
+var flashTimer;
 
 export default class Index extends Component {
+
 
   constructor() {
     super(...arguments);
     this.state = {
-      activity: [],
+      // activity: [],
       searchValue: '',
       userList: [],
-      luckyDog: {}
+      luckyDog: {},
+      openModal: false,
+      lotteryActivity: [],
+      noneLotteryActivity: [],
+      current: 0
     }
+  }
+
+  switchTabs(value) {
+    this.setState({
+      current: value
+    })
+  }
+
+  click() {
+    this.setState({
+      openModal: true
+    })
+  }
+
+  close() {
+    this.setState({
+      openModal: false
+    })
   }
 
   setSearchValue(e) {
@@ -25,14 +49,34 @@ export default class Index extends Component {
     })
   }
 
+  stopInter() {
+    clearInterval(flashTimer)
+  }
+
+
   componentWillMount() {
+
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/activity/list'
     }).then(res => {
       if (res.statusCode === 200) {
-        this.setState({
-          activity: res.data
-        });
+        // this.setState({
+        //   activity: res.data
+        // });
+        // 分配进去不同的数组
+        for (var i = 0; i < res.data.length; i++) {
+          if (res.data[i].lottery === true) {
+            this.state.lotteryActivity.push(res.data[i]);
+            this.setState({
+              lotteryActivity: this.state.lotteryActivity
+            })
+          } else {
+            this.state.noneLotteryActivity.push(res.data[i]);
+            this.setState({
+              noneLotteryActivity: this.state.noneLotteryActivity
+            })
+          }
+        }
       }
     });
     Taro.request({
@@ -43,18 +87,22 @@ export default class Index extends Component {
     }).then(res => {
       this.setState({
         luckyDog: {
-          username: '121',
-          reward: 'java高级编程教材一本'
+          username: '您还未登录噢~',
+          reward: '登录后就能看到中奖公告了呢~'
         }
       });
       if (res.statusCode === 200) {
         for (var i = 0; i < res.data.length; i++) {
           this.state.userList.push(res.data[i].id);
           this.setState({
-            userList: this.state.userList
+            userList: this.state.userList,
+            luckyDog: {
+              username: '恭喜121',
+              reward: '获得JAVA高编教程'
+            }
           })
         }
-        setInterval(() => {
+        flashTimer = setInterval(() => {
           var index = Math.floor(Math.random() * (res.data.length - 1 + 1));
           var id = res.data[index].id;
           Taro.request({
@@ -74,15 +122,15 @@ export default class Index extends Component {
                 if (luckU.statusCode === 200) {
                   this.setState({
                     luckyDog: {
-                      username: luckU.data[0].username,
-                      reward: luck.data[priceIndex].reward.name
+                      username: '恭喜' + luckU.data[0].username,
+                      reward: '获得' + luck.data[priceIndex].reward.name
                     }
                   })
                 }
               })
             }
-          })
-        }, 6000)
+          });
+        }, 3000)
       }
     })
   }
@@ -95,18 +143,25 @@ export default class Index extends Component {
   }
 
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '首页',
   };
 
   render() {
+    const tabList = [
+      {
+        title: '未开奖'
+      },
+      {
+        title: '已开奖'
+      }
+    ];
     return (
       <View>
-        {/*<AtCurtain onClose={this.closeCurtain.bind(this)} isOpened={this.state.curtain} >*/}
-        {/*<Image mode={"widthFix"} src={luck}/>*/}
-        {/*</AtCurtain>*/}
         <AtSearchBar value={this.state.searchValue} onChange={this.setSearchValue.bind(this)}/>
-        <AtNoticebar marquee
-                     icon='volume-plus'>恭喜{this.state.luckyDog.username}获得{this.state.luckyDog.reward}</AtNoticebar>
+        <AtModal content='这些按键的功能还在开发中噢，现在只是个装饰还不能用的呢' isOpened={this.state.openModal} confirmText='好吧'
+                 onConfirm={this.close.bind(this)} onClose={this.close.bind(this)}/>
+        <AtNoticebar single close onClose={this.stopInter.bind(this)}
+                     icon='volume-plus'>{this.state.luckyDog.username}{this.state.luckyDog.reward}</AtNoticebar>
         <View style='text-align: center;'>
           <Swiper
             indicatorColor='#999'
@@ -124,7 +179,7 @@ export default class Index extends Component {
           </Swiper>
         </View>
         <View style='margin-top: 2%'>
-          <AtGrid mode='rect' data={
+          <AtGrid onClick={this.click.bind(this)} mode='rect' data={
             [
               {
                 image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
@@ -155,26 +210,44 @@ export default class Index extends Component {
                   hasBorder={true}
           />
         </View>
-        <View className='more'>更多活动</View>
-        {
-          this.state.activity.map(item => {
-            return <View className='margin'>
-              <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name + (item.lottery ? '(已开奖)' : '')}
-                      extra={'发起人：' + item.author.username}>
-                <View className='at-article__p' style='text-align: center;'>
-                  当前参与人数:{item.p_number}
+        <AtTabs current={this.state.current} tabList={tabList} onClick={this.switchTabs.bind(this)}>
+          <AtTabsPane current={this.state.current} index={0}>
+            {
+              this.state.noneLotteryActivity.map(item => {
+                return <View className='margin'>
+                  <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
+                          extra={'发起人：' + item.author.username}>
+                    <View className='at-article__p' style='text-align: center;'>
+                      当前参与人数:{item.p_number}
+                    </View>
+                    <View>
+                      {item.description}
+                    </View>
+                  </AtCard>
                 </View>
-                <View>
-                  {item.description}
+              })
+            }
+          </AtTabsPane>
+          <AtTabsPane current={this.state.current} index={1}>
+            {
+              this.state.lotteryActivity.map(item => {
+                return <View className='margin'>
+                  <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
+                          extra={'发起人：' + item.author.username}>
+                    <View className='at-article__p' style='text-align: center;'>
+                      当前参与人数:{item.p_number}
+                    </View>
+                    <View>
+                      {item.description}
+                    </View>
+                  </AtCard>
                 </View>
-              </AtCard>
-            </View>
-          })
-        }
+              })
+            }
+          </AtTabsPane>
+        </AtTabs>
         <AtDivider content='没有更多了'/>
       </View>
     )
   }
 }
-
-

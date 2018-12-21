@@ -6,6 +6,7 @@ import save from '../../../config/loginSave'
 import '../../index/index.scss'
 
 export default class listPrice extends Component {
+
   constructor() {
     super(...arguments);
     this.state = {
@@ -27,7 +28,7 @@ export default class listPrice extends Component {
 
   componentWillMount() {
     Taro.request({
-      url: 'https://www.r-share.cn/webao_war/prize/list',
+      url: 'https://www.r-share.cn/webao_war/prize/list?all=1',
       header: {
         'Cookie': save.MyLoginSessionID
       }

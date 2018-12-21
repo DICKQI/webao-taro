@@ -11,7 +11,8 @@ export default class myActivity extends Component {
   constructor() {
     super(...arguments);
     this.state = {
-      activity: []
+      activity: [],
+      empty: false
     }
   }
 
@@ -27,9 +28,16 @@ export default class myActivity extends Component {
       }
     }).then(res => {
       if (res.statusCode === 200) {
-        this.setState({
-          activity: res.data
-        })
+        if (JSON.stringify(res.data) === '[]') {
+          this.setState({
+            empty: true
+          })
+        } else {
+          this.setState({
+            empty: false,
+            activity: res.data
+          })
+        }
       }
     })
   }
@@ -45,13 +53,18 @@ export default class myActivity extends Component {
       <View>
         <AtNavBar>我参加的活动</AtNavBar>
         {
-          this.state.activity.map(item => {
-            return <View style='margin: 3vh 3%'>
-              <AtCard onClick={this.toDetail.bind(this, item.id)} title={item.name}>
-                {item.description}
-              </AtCard>
+          this.state.empty ?
+            <View style='text-align: center;color:gray;font-size: 20px'>
+              你还没有参加任何活动呢，快去参加吧
             </View>
-          })
+           : this.state.activity.map(item => {
+              return <View style='margin: 3vh 3%'>
+                <AtCard onClick={this.toDetail.bind(this, item.id)} title={item.name}>
+                  {item.description}
+                </AtCard>
+              </View>
+            })
+
         }
         <AtMessage/>
       </View>

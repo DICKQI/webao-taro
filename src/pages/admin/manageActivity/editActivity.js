@@ -155,7 +155,14 @@ export default class editActivity extends Component {
     })
   }
 
-  componentWillMount() {
+  deleteReward() {
+    Taro.request({
+      url: 'http://www.r-share.cn:8080/webao_war/activity/manage?'
+    })
+  }
+
+
+  componentDidMount() {
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/activity?id=' + this.state.id,
       header: {

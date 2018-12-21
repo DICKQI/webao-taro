@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View} from '@tarojs/components'
-import {AtButton, AtMessage, AtAvatar, AtGrid, AtActionSheet, AtActionSheetItem} from 'taro-ui'
+import {View, Image} from '@tarojs/components'
+import {AtButton, AtAvatar, AtGrid, AtCurtain, AtActionSheet, AtActionSheetItem, AtModal} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import './dashboard.scss'
@@ -11,6 +11,11 @@ import myJoin from '../../static/myjoin.png'
 import manageUser from '../../static/manageUser.png'
 import managePrice from '../../static/managePrice.png'
 import manageActivity from '../../static/manageActivity.png'
+import myReward from '../../static/myReward.png'
+import money from '../../static/money.png'
+import myPrice from '../../static/myPrice.png'
+import payment from '../../static/payment.jpeg'
+import payment2 from '../../static/payment2.jpeg'
 
 export default class dashboard extends Component {
   config = {
@@ -24,9 +29,27 @@ export default class dashboard extends Component {
       status: false,
       userRole: '',
       isAdmin: false,
-      openedManagePrice: false
+      openedManagePrice: false,
+      openCurtain: false,
+      lzlCurtain: false,
+
+      exitCheck: false
     }
   }
+
+  closeCurtain() {
+    this.setState({
+      openCurtain: false,
+      lzlCurtain: true
+    })
+  }
+
+  closeLZLCurtain() {
+    this.setState({
+      lzlCurtain: false,
+    })
+  }
+
 
   componentWillMount() {
     Taro.request({
@@ -39,7 +62,6 @@ export default class dashboard extends Component {
         'Cookie': save.MyLoginSessionID
       }
     }).then(res => {
-      Taro.showToast({title: '加载中'});
       if (res.statusCode === 401) {
         Taro.showToast(res.data[0].error);
         this.setState({
@@ -49,6 +71,9 @@ export default class dashboard extends Component {
           url: 'login'
         })
       } else if (res.statusCode === 200) {
+        Taro.showToast({
+          title: '加载成功'
+        });
         this.setState({
           status: true,
           username: res.data[0].username,
@@ -93,13 +118,28 @@ export default class dashboard extends Component {
     })
   }
 
+  logout() {
+    save.MyLoginSessionID = '';
+    save.MyID = '';
+    this.setState({
+      exitCheck: false
+    });
+    Taro.reLaunch({
+      url: '/pages/users/dashboard'
+    });
+  }
+
+  closeMyModal() {
+    this.setState({
+      exitCheck: false
+    })
+  }
+
   userAction = (item, index) => {
     switch (index) {
       case 0:
-        save.MyLoginSessionID = '';
-        save.MyID = '';
-        Taro.reLaunch({
-          url: '/pages/users/dashboard'
+        this.setState({
+          exitCheck: true
         });
         break;
       case 1:
@@ -110,6 +150,21 @@ export default class dashboard extends Component {
       case 2:
         Taro.navigateTo({
           url: '/pages/users/myActivity'
+        });
+        break;
+      case 3:
+        Taro.navigateTo({
+          url: '/pages/users/listPrice'
+        });
+        break;
+      case 4:
+        Taro.navigateTo({
+          url: '/pages/users/myReward'
+        });
+        break;
+      case 5:
+        this.setState({
+          openCurtain: true
         });
         break;
     }
@@ -142,10 +197,18 @@ export default class dashboard extends Component {
 
   render() {
     return (
-      <View className='line'>
+      <View>
+        <AtModal content='确定要离开吗？' isOpened={this.state.exitCheck} confirmText='确定' cancelText='留下来' onConfirm={this.logout.bind(this)}
+                 onClose={this.closeMyModal.bind(this)} onCancel={this.closeMyModal.bind(this)}/>
         {
           this.state.status ?
             <View>
+              <AtCurtain isOpened={this.state.openCurtain} onClose={this.closeCurtain.bind(this)}>
+                <Image src={payment} mode={"widthFix"} style='width: 80%;height:80%;margin-left: 5vh'/>
+              </AtCurtain>
+              <AtCurtain isOpened={this.state.lzlCurtain} onClose={this.closeLZLCurtain.bind(this)}>
+                <Image src={payment2} mode={"widthFix"} style='width: 80%;height:80%;margin-left: 5vh'/>
+              </AtCurtain>
               <View className='userInfo'>
                 <AtAvatar className='at-row__align-content--end' circle size={"large"}
                           image='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544496842193&di=bb5d519e49746f85df5e6c7921016f59&imgtype=0&src=http%3A%2F%2Fs9.rr.itc.cn%2Fr%2FwapChange%2F20171_18_16%2Fa9i5ff9624017280331.jpg'>
@@ -168,6 +231,18 @@ export default class dashboard extends Component {
                     {
                       image: myJoin,
                       value: '参加的活动'
+                    },
+                    {
+                      image: myPrice,
+                      value: '查看所有奖品'
+                    },
+                    {
+                      image: myReward,
+                      value: '中奖纪录',
+                    },
+                    {
+                      image: money,
+                      value: '向开发者捐赠'
                     }
                   ]
                 }/>
@@ -191,7 +266,7 @@ export default class dashboard extends Component {
                         }
                       ]
                     }/>
-                    <View style='margin-left:10px;margin-right: 10px'>
+                    <View style='margin-left:10px;margin-right: 10px;margin-bottom:3vh;'>
                       <AtButton type='primary' onClick={this.newActivity.bind(this)}>
                         发起抽奖
                       </AtButton>
@@ -205,7 +280,8 @@ export default class dashboard extends Component {
 
             <View style='margin-top: 50%;color:dodgerblue'>
               <View
-                style='text-align: center;display: flex;justify-content: center;flex-direction: column;align-items: center;'><View style='margin-bottom:3%'>你还未登录呢，还不能进行别的操作嚯</View>
+                style='text-align: center;display: flex;justify-content: center;flex-direction: column;align-items: center;'><View
+                style='margin-bottom:3%'>你还未登录呢，还不能进行别的操作嚯</View>
                 <AtButton size={"small"} type={"primary"}
                           onClick={this.jumpToLogin.bind(this)}>点击我进入登录界面吧</AtButton>
               </View>
