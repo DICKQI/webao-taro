@@ -1,12 +1,12 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
-import {AtButton, AtFloatLayout, AtMessage, AtRate} from 'taro-ui'
+import {AtButton, AtFloatLayout, AtMessage, AtRate, AtList, AtListItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../users/dashboard.scss'
 import '../index/index.scss'
 
-export default class listPrice extends Component{
+export default class listPrice extends Component {
 
   constructor() {
     super(...arguments);
@@ -81,14 +81,18 @@ export default class listPrice extends Component{
   render() {
     return (
       <View>
-        {
-          this.state.priceList.map(item => {
-            return <View style='margin: 3vh 5%;'><AtButton type={"secondary"}
-                                                           onClick={this.checkPrice.bind(this, item.id)}> {item.name}</AtButton></View>
-          })
-        }
+        <AtList>
+          {
+            this.state.priceList.map((item, index) => {
+              return <View key={index}>
+                <AtListItem thumb='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/rewardIcon.png'
+                            onClick={this.checkPrice.bind(this, item.id)} title={item.name} arrow={"right"}/>
+              </View>
+            })
+          }
+        </AtList>
         <AtFloatLayout title='详情' isOpened={this.state.check} onClose={this.closeFloat.bind(this)}>
-          <View className='toCenter'>
+          <View className='toCenter' style='margin-top: 5vh;font-size: 20px;'>
             <View>{this.state.name}</View>
             <View>
               <View>等级:{this.state.grade}级</View>

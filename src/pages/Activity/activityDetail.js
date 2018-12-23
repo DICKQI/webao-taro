@@ -1,11 +1,9 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Image} from '@tarojs/components'
-import {AtButton, AtMessage, AtCard, AtNoticebar, AtCurtain, AtFloatLayout} from 'taro-ui'
+import {AtButton, AtMessage, AtCard, AtNoticebar, AtCurtain, AtFloatLayout, AtListItem, AtList} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../users/dashboard.scss'
-import luck from '../../static/luck.png'
-import divide from '../../static/divider.png'
 
 var flashTimer;
 
@@ -134,13 +132,13 @@ export default class activityDetail extends Component {
           header: {
             'Cookie': save.MyLoginSessionID
           }
-        }).then(res=>{
+        }).then(res => {
           if (res.statusCode === 200) {
             this.setState({
               joinUserList: res.data[0].data,
               openNotice: true,
             });
-            flashTimer = setInterval(()=>{
+            flashTimer = setInterval(() => {
               var index = Math.floor(Math.random() * (res.data[0].data.length - 1 + 1));
               this.setState({
                 joinUser: res.data[0].data[index]
@@ -191,10 +189,17 @@ export default class activityDetail extends Component {
           'message': '祝好运呢！！！',
           'type': 'success'
         });
-        this.setState({
-          p_number: this.state.p_number + 1
+        Taro.request({
+          url: 'https://www.r-share.cn/webao_war/activity?id=' + this.$router.params.id,
+          method: "GET",
+          header: {
+            'Cookie': save.MyLoginSessionID
+          }
+        }).then(res => {
+          this.setState({
+            p_number: res.data[0].p_number
+          })
         })
-
       } else {
         Taro.atMessage({
           'message': res.data[0].msg,
@@ -220,18 +225,18 @@ export default class activityDetail extends Component {
     return (
       <View>
         <AtCurtain onClose={this.luckDraw.bind(this)} isOpened={this.state.myLuck}>
-          <Image mode={"widthFix"} src={luck}/>
+          <Image mode={"widthFix"} src='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/image/luck.png'/>
         </AtCurtain>
         {
           this.state.openNotice ?
-           <AtNoticebar icon='volume-plus' marquee>欢迎{this.state.joinUser}参加抽奖</AtNoticebar> : ''
+            <AtNoticebar icon='volume-plus' marquee>欢迎{this.state.joinUser}参加抽奖</AtNoticebar> : ''
         }
         <View style='text-align: center;' className='at-article__p'>{this.state.name}</View>
         <View style='margin: 3vh 0;'>
           <AtCard title='本次活动的奖品' extra={'发起人:' + this.state.author.username}>
             {
-              this.state.reward.map(item => {
-                return <View>
+              this.state.reward.map((item, index) => {
+                return <View key={index}>
                   <View className='at-article__p'>奖品名：{item.reward.name}</View>
                   <View className='at-article__p'>数量：{item.number}</View>
                 </View>
@@ -248,10 +253,11 @@ export default class activityDetail extends Component {
         {
           this.state.lottery ? <View className='userInfo'>
               <View style='margin-bottom: 2vh;margin-top: 1vh'>抽奖结果</View>
-              <Image src={divide} style='width: 100%; height: 12vh'/>
+              <Image src='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/image/divider.png'
+                     style='width: 100%; height: 12vh'/>
               {
-                this.state.result.map(item => {
-                  return <View style='margin-top: 2vh 0;color:red;' className='at-article__h1'>
+                this.state.result.map((item, index) => {
+                  return <View key={index} style='margin-top: 2vh 0;color:red;' className='at-article__h1'>
                     恭喜{item.account.username}获得{item.reward.name}
                   </View>
                 })
@@ -268,10 +274,11 @@ export default class activityDetail extends Component {
             </View>
         }
         <View>
+
           <AtFloatLayout title='参与人' isOpened={this.state.openFloat} onClose={this.closeUserFloat.bind(this)}>
             {
-              this.state.joinUserList.map(item=>{
-                return <View style='text-align: center;font-size: 20px'>
+              this.state.joinUserList.map((item, index) => {
+                return <View key={index} style='text-align: center;font-size: 20px'>
                     {item}
                 </View>
               })

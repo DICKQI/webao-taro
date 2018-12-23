@@ -1,9 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
-import index from './static/index.png'
-import me from './static/me.png'
-import UnSelectIndex from './static/unSelectIndex.png'
-import UnSelectMe from './static/unSelectMe.png'
 
 import './app.scss'
 
@@ -19,7 +15,6 @@ class App extends Component {
       'pages/index/index',
       'pages/users/dashboard',
       'pages/users/login',
-      'pages/users/register',
       'pages/users/resetPassword',
       'pages/users/myActivity',
       'pages/users/listPrice',
@@ -51,14 +46,10 @@ class App extends Component {
         {
           pagePath:'pages/index/index',
           text:'首页',
-          iconPath: UnSelectIndex,
-          selectedIconPath: index
         },
         {
           pagePath:'pages/users/dashboard',
           text:'我的',
-          iconPath: UnSelectMe,
-          selectedIconPath: me
         }
       ]
     }

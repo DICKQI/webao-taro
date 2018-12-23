@@ -3,10 +3,6 @@ import {View, Image} from "@tarojs/components"
 import {AtButton, AtInput, AtMessage, AtGrid, AtDivider} from 'taro-ui'
 import save from '../../config/loginSave'
 import '../users/dashboard.scss'
-import pig from '../../static/WEIAO.png'
-import wechat from '../../static/wechat.png'
-import qq from '../../static/qq.png'
-import weibo from '../../static/weibo.png'
 
 export default class MyLogin extends Component {
   config = {
@@ -135,7 +131,8 @@ export default class MyLogin extends Component {
       <View>
         <View style='display: flex;justify-content: center;align-items: center;flex-direction: column;'>
           <View style='margin-top: 3vh'>
-            <Image mode={"widthFix"} src={pig} style='width: 25vh; height:25vh'/>
+            <Image mode={"widthFix"} src='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/image/WEIAO.png'
+                   style='width: 25vh; height:25vh'/>
           </View>
           <View style='margin-top: 8vh; margin-bottom: 1vh;'>
             <AtInput title='用户名' name='username' type='text' onChange={this.setUsername.bind(this)}
@@ -161,15 +158,15 @@ export default class MyLogin extends Component {
           <AtGrid data={
             [
               {
-                image: wechat,
+                image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/wechat.png',
                 value: '微信'
               },
               {
-                image: qq,
+                image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/qq.png',
                 value: 'QQ'
               },
               {
-                image: weibo,
+                image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/weibo.png',
                 value: '微博'
               }
             ]

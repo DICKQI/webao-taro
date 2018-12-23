@@ -187,8 +187,8 @@ export default class ActivityList extends Component {
     return (
       <View>
         {
-          this.state.activityList.map(item => {
-            return <View style='margin: 3vh 0;'>
+          this.state.activityList.map((item, index) => {
+            return <View key={index} style='margin: 3vh 0;'>
               <AtCard onClick={this.openFloat.bind(this, item.name, item.id)}
                       title={item.name + (item.lottery ? '(已开奖)' : '')}
                       extra={item.author.username}>
@@ -201,8 +201,8 @@ export default class ActivityList extends Component {
                        onClose={this.closeFloat.bind(this)}>
           <AtCard title='本次活动的奖品们'>
             {
-              this.state.reward.map(item => {
-                return <View className='at-article__p'>
+              this.state.reward.map((item, index) => {
+                return <View key={index} className='at-article__p'>
                   <View>奖品名：{item.reward.name}</View>
                   <View>数量：{item.number}</View>
                 </View>
@@ -215,8 +215,8 @@ export default class ActivityList extends Component {
             this.state.lottery ? <View className='userInfo'>
                 抽奖结果
                 {
-                  this.state.result.map(item => {
-                    return <View style='margin-top: 1vh 0;color:red;' className='at-article__h1'>
+                  this.state.result.map((item, index) => {
+                    return <View key={index} style='margin-top: 1vh 0;color:red;' className='at-article__h1'>
                       恭喜{item.account.username}获得{item.reward.name}
                     </View>
                   })

@@ -238,8 +238,8 @@ export default class editActivity extends Component {
                       maxlength={200} placeholder='请输入商品描述'/>
           <View style='text-align: center;margin-top:2vh;'>当前活动的奖品,点击奖品可以更改数量</View>
           {
-            this.state.reward.map(item => {
-              return <View>
+            this.state.reward.map((item, index) => {
+              return <View key={index}>
                 <View onClick={this.setRewardInfo.bind(this, item.reward.id, item.id, item.number, item.reward.name)}
                       className='at-article__p'>奖品名：{item.reward.name} 数量：{item.number}</View>
               </View>

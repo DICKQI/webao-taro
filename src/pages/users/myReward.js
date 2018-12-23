@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
-import {AtMessage, AtButton, AtModal} from 'taro-ui'
+import {AtMessage, AtButton, AtModal, AtList, AtListItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../index/index.scss'
@@ -18,7 +18,7 @@ export default class myReward extends Component {
     }
   }
 
-  config =  {
+  config = {
     navigationBarTitleText: '我的中奖'
   };
 
@@ -49,7 +49,10 @@ export default class myReward extends Component {
     })
   }
 
-  checkReward(lid) {
+  checkReward(lid, exchange) {
+    if (exchange === true) {
+      return
+    }
     this.setState({
       luckId: lid,
       openModal: true
@@ -104,13 +107,10 @@ export default class myReward extends Component {
           this.state.empty ? <View style='text-align: center;color: gray;font-size: 16px;margin-top: 70%'>
               ~~你还没有任何的中奖奖品呢，快去参加活动吧~~
             </View> :
-            this.state.userReward.map(item => {
-              return <View style='margin-top: 3vh;color:red;text-align:center'>
-                {item.reward.name}
-                {
-                  item.exchange ? '~已兑奖~' : <View style='margin-top:1vh'><AtButton type={"primary"} size={"small"}
-                                                                                   onClick={this.checkReward.bind(this, item.id)}>兑奖</AtButton></View>
-                }
+            this.state.userReward.map((item, index) => {
+              return <View key={index} onClick={this.checkReward.bind(this, item.id, item.exchange)}>
+                <AtListItem thumb='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/rewardIcon.png'
+                            title={item.reward.name} extraText={item.exchange ? '已兑奖' : '点击兑奖~'}/>
               </View>
             })
         }

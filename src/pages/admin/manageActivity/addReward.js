@@ -107,8 +107,8 @@ export default class addReward extends Component {
           <View style='margin-top:3vh'>点击奖品名后可以添加</View>
           {
 
-            this.state.price.map(item => {
-              return <View onClick={this.openFloat.bind(this, item.id, item.name, item.available)}
+            this.state.price.map((item, index) => {
+              return <View key={index} onClick={this.openFloat.bind(this, item.id, item.name, item.available)}
                            style='margin: 1vh 0'>
                 奖品名：{item.name} 可用数量：{item.available}
               </View>

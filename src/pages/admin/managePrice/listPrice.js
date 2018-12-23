@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
-import {AtButton, AtMessage, AtRate, AtFloatLayout} from 'taro-ui'
+import {AtButton, AtMessage, AtRate, AtFloatLayout, AtList, AtListItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../../config/loginSave'
 import '../../index/index.scss'
@@ -133,15 +133,18 @@ export default class listPrice extends Component {
   render() {
     return (
       <View>
-        {
-          this.state.priceList.map(item => {
-            return <View style='margin: 3vh 5%;'><AtButton type={"secondary"}
-                                                           onClick={this.checkPrice.bind(this, item.id)}> {item.name}</AtButton></View>
-          })
-        }
-
+        <AtList>
+          {
+            this.state.priceList.map((item, index) => {
+              return <View key={index}>
+                <AtListItem thumb='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/rewardIcon.png' title={item.name}
+                            arrow={"right"} onClick={this.checkPrice.bind(this, item.id)}/>
+              </View>
+            })
+          }
+        </AtList>
         <AtFloatLayout title='详情' isOpened={this.state.check} onClose={this.closeFloat.bind(this)}>
-          <View className='toCenter'>
+          <View className='toCenter' style='margin-top: 5vh;font-size: 20px;'>
             <View>{this.state.name}</View>
             <View>库存量：{this.state.stock}</View>
             <View>
@@ -150,7 +153,7 @@ export default class listPrice extends Component {
                 value={this.state.grade}
               />
             </View>
-            <View>是否启用：{this.state.is_use}</View>
+            <View>{this.state.is_use ? '启用' : '未启用'}</View>
             <View>可用库存数：{this.state.available}</View>
           </View>
           <View className='at-row'>

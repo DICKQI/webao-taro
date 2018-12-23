@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
-import {AtMessage, AtCard, AtNavBar} from 'taro-ui'
+import {AtMessage, AtTabs, AtTabsPane, AtCard} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import './dashboard.scss'
@@ -12,7 +12,11 @@ export default class myActivity extends Component {
     super(...arguments);
     this.state = {
       activity: [],
-      empty: false
+      lotteryActivity: [],
+      noneLotteryActivity: [],
+      lotteryEmpty: true,
+      noneLotteryEmpty: true,
+      current: 0
     }
   }
 
@@ -20,7 +24,7 @@ export default class myActivity extends Component {
     navigationBarTitleText: '我参加的活动'
   };
 
-  componentDidMount() {
+  componentWillMount() {
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/account/activity?id=' + save.MyID,
       header: {
@@ -30,13 +34,25 @@ export default class myActivity extends Component {
       if (res.statusCode === 200) {
         if (JSON.stringify(res.data) === '[]') {
           this.setState({
-            empty: true
+            lotteryEmpty: true,
+            noneLotteryEmpty: true
           })
         } else {
-          this.setState({
-            empty: false,
-            activity: res.data
-          })
+          for (var i = 0; i < res.data.length; i++) {
+            if (res.data[i].lottery === true) {
+              this.state.lotteryActivity.push(res.data[i]);
+              this.setState({
+                lotteryEmpty: false,
+                lotteryActivity: this.state.lotteryActivity
+              })
+            } else {
+              this.state.noneLotteryActivity.push(res.data[i]);
+              this.setState({
+                noneLotteryEmpty: false,
+                noneLotteryActivity: this.state.noneLotteryActivity
+              })
+            }
+          }
         }
       }
     })
@@ -48,7 +64,21 @@ export default class myActivity extends Component {
     })
   }
 
+  switchTabs(value) {
+    this.setState({
+      current: value
+    })
+  }
+
   render() {
+    const tabList = [
+      {
+        title: '未开奖'
+      },
+      {
+        title: '已开奖'
+      }
+    ];
     return (
       <View>
         {
@@ -56,8 +86,8 @@ export default class myActivity extends Component {
             <View style='text-align: center;color:gray;font-size: 20px;margin-top: 70%'>
               你还没有参加任何活动呢，快去参加吧
             </View>
-           : this.state.activity.map(item => {
-              return <View style='margin: 3vh 3%'>
+            : this.state.activity.map((item, index) => {
+              return <View key={index} style='margin: 3vh 3%'>
                 <AtCard onClick={this.toDetail.bind(this, item.id)} title={item.name}>
                   {item.description}
                 </AtCard>
@@ -65,6 +95,38 @@ export default class myActivity extends Component {
             })
 
         }
+        <AtTabs current={this.state.current} tabList={tabList} onClick={this.switchTabs.bind(this)}>
+          <AtTabsPane current={this.state.current} index={0}>
+            {
+              this.state.noneLotteryEmpty ?
+                <View style='text-align: center;color:gray;font-size: 20px;margin-top: 70%'>
+                  您参加的活动都已经开奖了或者您还没参加任何活动噢~
+                </View> :
+                this.state.noneLotteryActivity.map((item, index) => {
+                  return <View key={index} style='margin: 3vh 3%'>
+                    <AtCard onClick={this.toDetail.bind(this, item.id)} title={item.name}>
+                      {item.description}
+                    </AtCard>
+                  </View>
+                })
+            }
+          </AtTabsPane>
+          <AtTabsPane current={this.state.current} index={1}>
+            {
+              this.state.lotteryEmpty ?
+                <View style='text-align: center;color:gray;font-size: 20px;margin-top: 70%'>
+                  您还没有已经开奖的活动呢~
+                </View> :
+                this.state.lotteryActivity.map((item, index) => {
+                  return <View key={index} style='margin: 3vh 3%'>
+                    <AtCard onClick={this.toDetail.bind(this, item.id)} title={item.name}>
+                      {item.description}
+                    </AtCard>
+                  </View>
+                })
+            }
+          </AtTabsPane>
+        </AtTabs>
         <AtMessage/>
       </View>
     );

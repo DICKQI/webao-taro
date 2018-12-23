@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
-import {AtMessage, AtCard, AtActionSheet, AtActionSheetItem, AtFloatLayout, AtModal} from 'taro-ui'
+import {AtMessage, AtCard, AtActionSheet, AtActionSheetItem, AtFloatLayout, AtModal, AtList, AtListItem} from 'taro-ui'
 import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import '../index/index.scss'
@@ -287,8 +287,8 @@ export default class admin extends Component {
       <View className='at-article'>
         <View style='text-align: center;color: gray;margin-top:1.5vh'>点击用户名查看当前用户信息</View>
         {
-          this.state.userList.map(item => {
-            return <View onClick={this.checkId.bind(this, item.id)} className='margin'>
+          this.state.userList.map((item, index) => {
+            return <View key={index} onClick={this.checkId.bind(this, item.id)} className='margin'>
               <AtCard
                 title={item.username}
               >
@@ -330,8 +330,8 @@ export default class admin extends Component {
           <AtFloatLayout isOpened={this.state.checkUserActivity} title={this.state.username}
                          onClose={this.closeFloatLayout.bind(this)}>
             {
-              this.state.userActivityList.map(item => {
-                return <View style='margin: 3vh 0 2vh 2vh' onClick={this.toDetail.bind(this, item.id)}>
+              this.state.userActivityList.map((item, index) => {
+                return <View key={index} style='margin: 3vh 0 1vh 2vh' onClick={this.toDetail.bind(this, item.id)}>
                   <AtCard title={item.name}>
                     {item.description}
                   </AtCard>
@@ -343,16 +343,15 @@ export default class admin extends Component {
         <View>
           <AtFloatLayout isOpened={this.state.checkUserReward} title={this.state.username}
                          onClose={this.closeFloatLayout.bind(this)}>
+            <AtList>
             {
-              this.state.userReward.map(item => {
-                return <View className='userInfo' style='margin-top: 3vh;color:red'>
-                  {item.reward.name}
-                  {
-                    item.exchange ? '~已兑奖~' : '~未兑奖~'
-                  }
+              this.state.userReward.map((item, index) => {
+                return <View key={index}>
+                  <AtListItem title={item.reward.name} extraText={item.exchange ? '已兑奖': '未兑奖'}/>
                 </View>
               })
             }
+            </AtList>
           </AtFloatLayout>
         </View>
         <AtModal title='请谨慎操作' content={'你确定要删除' + this.state.username + '吗？'} isOpened={this.state.sureDeleteUser}

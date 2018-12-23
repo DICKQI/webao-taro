@@ -2,8 +2,6 @@ import Taro, {Component} from '@tarojs/taro'
 import {View, Image, Swiper, SwiperItem} from '@tarojs/components'
 import {AtGrid, AtSearchBar, AtDivider, AtCard, AtNoticebar, AtModal, AtTabs, AtTabsPane} from 'taro-ui'
 import './index.scss'
-import img1 from '../../static/1.jpeg'
-import img2 from '../../static/2.jpeg'
 import save from "../../config/loginSave";
 
 var flashTimer;
@@ -168,10 +166,10 @@ export default class Index extends Component {
             skipHiddenItemLayout
             autoplay>
             <SwiperItem>
-              <View><Image style='width:100%;height:100%' mode={"widthFix"} src={img1}/></View>
+              <View><Image style='width:100%;height:100%' mode={"widthFix"} src='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/image/1.jpeg'/></View>
             </SwiperItem>
             <SwiperItem>
-              <View><Image style='width:100%;height:100%' mode={"widthFix"} src={img2}/></View>
+              <View><Image style='width:100%;height:100%' mode={"widthFix"} src='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/image/2.jpeg'/></View>
             </SwiperItem>
           </Swiper>
         </View>
@@ -210,8 +208,8 @@ export default class Index extends Component {
         <AtTabs current={this.state.current} tabList={tabList} onClick={this.switchTabs.bind(this)}>
           <AtTabsPane current={this.state.current} index={0}>
             {
-              this.state.noneLotteryActivity.map(item => {
-                return <View className='margin'>
+              this.state.noneLotteryActivity.map((item, index) => {
+                return <View className='margin' key={index}>
                   <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
                           extra={'发起人：' + item.author.username}>
                     <View className='at-article__p' style='text-align: center;'>
@@ -227,8 +225,8 @@ export default class Index extends Component {
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
             {
-              this.state.lotteryActivity.map(item => {
-                return <View className='margin'>
+              this.state.lotteryActivity.map((item, index) => {
+                return <View className='margin' key={index}>
                   <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
                           extra={'发起人：' + item.author.username}>
                     <View className='at-article__p' style='text-align: center;'>

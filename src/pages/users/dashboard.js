@@ -5,17 +5,7 @@ import 'taro-ui/dist/weapp/css/index.css'
 import save from '../../config/loginSave'
 import './dashboard.scss'
 import './users.scss'
-import logout from '../../static/logout.png'
-import reset from '../../static/resetIcon.png'
-import myJoin from '../../static/myjoin.png'
-import manageUser from '../../static/manageUser.png'
-import managePrice from '../../static/managePrice.png'
-import manageActivity from '../../static/manageActivity.png'
-import myReward from '../../static/myReward.png'
-import money from '../../static/money.png'
-import myPrice from '../../static/myPrice.png'
-import payment from '../../static/payment.jpeg'
-import payment2 from '../../static/payment2.jpeg'
+import error from '../../static/error.png'
 
 export default class dashboard extends Component {
   config = {
@@ -63,13 +53,18 @@ export default class dashboard extends Component {
       }
     }).then(res => {
       if (res.statusCode === 401) {
-        Taro.showToast(res.data[0].error);
-        this.setState({
-          status: false
+        Taro.showToast({
+          title: res.data[0].msg,
+          image: error
         });
-        Taro.navigateTo({
-          url: 'login'
-        })
+        setTimeout(() => {
+          this.setState({
+            status: false
+          });
+          Taro.navigateTo({
+            url: 'login'
+          })
+        }, 1200)
       } else if (res.statusCode === 200) {
         Taro.showToast({
           title: '加载成功'
@@ -198,50 +193,55 @@ export default class dashboard extends Component {
   render() {
     return (
       <View>
-        <AtModal content='确定要离开吗？' isOpened={this.state.exitCheck} confirmText='确定' cancelText='留下来' onConfirm={this.logout.bind(this)}
+        <AtModal content='确定要离开吗？' isOpened={this.state.exitCheck} confirmText='确定' cancelText='留下来'
+                 onConfirm={this.logout.bind(this)}
                  onClose={this.closeMyModal.bind(this)} onCancel={this.closeMyModal.bind(this)}/>
         {
           this.state.status ?
             <View>
               <AtCurtain isOpened={this.state.openCurtain} onClose={this.closeCurtain.bind(this)}>
-                <Image src={payment} mode={"widthFix"} style='width: 80%;height:80%;margin-left: 5vh'/>
+                <Image src='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/image/payment.jpeg' mode={"widthFix"}
+                       style='width: 80%;height:80%;margin-left: 5vh'/>
               </AtCurtain>
               <AtCurtain isOpened={this.state.lzlCurtain} onClose={this.closeLZLCurtain.bind(this)}>
-                <Image src={payment2} mode={"widthFix"} style='width: 80%;height:80%;margin-left: 5vh'/>
+                <Image src='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/image/payment2.jpeg' mode={"widthFix"}
+                       style='width: 80%;height:80%;margin-left: 5vh'/>
               </AtCurtain>
               <View className='userInfo'>
-                <AtAvatar className='at-row__align-content--end' circle size={"large"}
-                          image='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544496842193&di=bb5d519e49746f85df5e6c7921016f59&imgtype=0&src=http%3A%2F%2Fs9.rr.itc.cn%2Fr%2FwapChange%2F20171_18_16%2Fa9i5ff9624017280331.jpg'>
-                </AtAvatar>
-                <View style='margin: 1vh 0;'>欢迎{this.state.username}</View>
-                <View style='margin: 2vh 0;'>用户组：{this.state.userRole}</View>
+                <View style='margin-top: 1vh'>
+                  <AtAvatar className='at-row__align-content--end' circle size={"large"}
+                            image='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544496842193&di=bb5d519e49746f85df5e6c7921016f59&imgtype=0&src=http%3A%2F%2Fs9.rr.itc.cn%2Fr%2FwapChange%2F20171_18_16%2Fa9i5ff9624017280331.jpg'>
+                  </AtAvatar>
+                </View>
+                <View style='margin-top: 1vh;'>欢迎 {this.state.username}</View>
+                <View style='margin-top: 1vh;'>用户组：{this.state.userRole}</View>
               </View>
 
               <View>
                 <AtGrid onClick={this.userAction.bind(this)} hasBorder={false} data={
                   [
                     {
-                      image: logout,
+                      image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/logout.png',
                       value: '登出'
                     },
                     {
-                      image: reset,
+                      image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/resetIcon.png',
                       value: '修改信息'
                     },
                     {
-                      image: myJoin,
+                      image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/myjoin.png',
                       value: '参加的活动'
                     },
                     {
-                      image: myPrice,
+                      image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/myPrice.png',
                       value: '查看所有奖品'
                     },
                     {
-                      image: myReward,
+                      image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/myReward.png',
                       value: '中奖纪录',
                     },
                     {
-                      image: money,
+                      image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/money.png',
                       value: '向开发者捐赠'
                     }
                   ]
@@ -253,15 +253,15 @@ export default class dashboard extends Component {
                     <AtGrid onClick={this.priceAction.bind(this)} hasBorder={false} data={
                       [
                         {
-                          image: manageUser,
+                          image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/manageUser.png',
                           value: '管理用户'
                         },
                         {
-                          image: managePrice,
+                          image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/managePrice.png',
                           value: '管理抽奖商品'
                         },
                         {
-                          image: manageActivity,
+                          image: 'https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/manageActivity.png',
                           value: '管理活动'
                         }
                       ]
