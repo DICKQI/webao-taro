@@ -45,6 +45,13 @@ export default class admin extends Component {
   }
 
   checkId(mid) {
+    if (mid === 28) {
+      Taro.atMessage({
+        'message': '你不能选择董科',
+        'type': 'error'
+      });
+      return
+    }
     Taro.request({
       url: 'https://www.r-share.cn/webao_war/account',
       method: "GET",

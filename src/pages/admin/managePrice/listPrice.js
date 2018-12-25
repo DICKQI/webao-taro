@@ -130,9 +130,16 @@ export default class listPrice extends Component {
     })
   }
 
+  toBatchDeletePrice() {
+    Taro.navigateTo({
+      url :'/pages/admin/managePrice/batchManage/batchDeletePrice'
+    })
+  }
+
   render() {
     return (
       <View>
+        <View style='margin-top: 1vh;margin-left: 2vh;margin-right: 2vh;margin-bottom: 2vh'><AtButton onClick={this.toBatchDeletePrice.bind(this)}>批量删除奖品</AtButton></View>
         <AtList>
           {
             this.state.priceList.map((item, index) => {

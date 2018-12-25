@@ -2,44 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae33a9fd-8540-4825-9260-c49aed2e13cc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/admin/managePrice/batchManage/batchDeletePrice.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Activity/activityDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Activity/activityDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/admin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/manageActivity/ActivityList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageActivity/ActivityList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageActivity/addReward.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageActivity/addReward.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/manageActivity/editActivity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/manageActivity/editActivity.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/managePrice/listPrice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/managePrice/listPrice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/managePrice/manage.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/users/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/users/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/users/listPrice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/users/listPrice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/users/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/users/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/users/myActivity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/users/myActivity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/users/myReward.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/users/myReward.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/users/register.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/WEIAO.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/divider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/index.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/logout.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/luck.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/manageActivity.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/managePrice.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/manageUser.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/me.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/money.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/myPrice.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/myReward.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/myjoin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/payment.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/payment2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/qq.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/resetIcon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/unSelectIndex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/unSelectMe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/wechat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/weibo.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -54,14 +26,15 @@
     <session id="1594893823">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.661" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -70,7 +43,7 @@
           <entry key="eslintrc" value="1" />
           <entry key="html" value="3" />
           <entry key="jpeg" value="1" />
-          <entry key="js" value="168" />
+          <entry key="js" value="176" />
           <entry key="json" value="19" />
           <entry key="md" value="1" />
           <entry key="png" value="10" />
@@ -86,7 +59,7 @@
           <entry key="HTML" value="3" />
           <entry key="Image" value="11" />
           <entry key="JSON" value="20" />
-          <entry key="JavaScript" value="168" />
+          <entry key="JavaScript" value="176" />
           <entry key="PLAIN_TEXT" value="13" />
           <entry key="SCSS" value="42" />
           <entry key="TypeScript" value="37" />
@@ -100,14 +73,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="57647" />
+          <entry key="js" value="59266" />
           <entry key="md" value="274" />
           <entry key="scss" value="276" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="57647" />
+          <entry key="JavaScript" value="59266" />
           <entry key="PLAIN_TEXT" value="274" />
           <entry key="SCSS" value="276" />
         </counts>
@@ -119,8 +92,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/index/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="242" column="17" lean-forward="true" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
+            <state relative-caret-position="957">
+              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -129,12 +102,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/users/myReward.js">
+        <entry file="file://$PROJECT_DIR$/src/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1665">
-              <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="101" />
+            <state relative-caret-position="330">
+              <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
               <folding>
-                <element signature="e#0#44#0" expanded="true" />
+                <element signature="e#0#46#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,32 +116,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/users/dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="768">
+              <caret line="212" column="96" selection-start-line="212" selection-start-column="96" selection-end-line="212" selection-end-column="96" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/users/listPrice.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="94" column="76" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/index/index.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="1" selection-start-column="1" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -176,7 +128,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/Activity/activityDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
+            <state relative-caret-position="2925">
               <caret line="200" column="12" lean-forward="true" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="12" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
@@ -188,20 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/users/myActivity.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="28" column="12" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="65" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/admin/manageActivity/addReward.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1425">
-              <caret line="100" column="45" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="45" />
+            <state relative-caret-position="1680">
+              <caret line="118" column="25" lean-forward="true" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -212,11 +152,56 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/listPrice.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="138" column="26" selection-start-line="138" selection-start-column="26" selection-end-line="138" selection-end-column="26" />
+            <state relative-caret-position="1470">
+              <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="43" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/batchManage/batchDeletePrice.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="30" column="85" selection-start-line="30" selection-start-column="85" selection-end-line="30" selection-end-column="85" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/manageActivity/ActivityList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3285">
+              <caret line="224" column="22" lean-forward="true" selection-start-line="224" selection-start-column="22" selection-end-line="224" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/admin.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/changePrice.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1920">
+              <caret line="134" column="19" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -250,6 +235,7 @@
       <find>Image</find>
       <find>wechat</find>
       <find>map(</find>
+      <find>setin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -283,18 +269,19 @@
         <option value="$PROJECT_DIR$/src/pages/users/resetPassword.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/changeUser.js" />
         <option value="$PROJECT_DIR$/src/pages/users/listActivity.js" />
-        <option value="$PROJECT_DIR$/src/pages/admin/manageActivity/ActivityList.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/manageActivity/editActivity.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/manageActivity/addReward.js" />
-        <option value="$PROJECT_DIR$/src/pages/users/dashboard.js" />
         <option value="$PROJECT_DIR$/src/pages/users/login.js" />
-        <option value="$PROJECT_DIR$/src/app.js" />
-        <option value="$PROJECT_DIR$/src/pages/admin/admin.js" />
         <option value="$PROJECT_DIR$/src/pages/users/myReward.js" />
-        <option value="$PROJECT_DIR$/src/pages/users/myActivity.js" />
         <option value="$PROJECT_DIR$/src/pages/Activity/activityDetail.js" />
         <option value="$PROJECT_DIR$/src/pages/users/listPrice.js" />
+        <option value="$PROJECT_DIR$/src/app.js" />
         <option value="$PROJECT_DIR$/src/pages/admin/managePrice/listPrice.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/managePrice/batchManage/batchDeletePrice.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/manageActivity/ActivityList.js" />
+        <option value="$PROJECT_DIR$/src/pages/users/myActivity.js" />
+        <option value="$PROJECT_DIR$/src/pages/users/dashboard.js" />
+        <option value="$PROJECT_DIR$/src/pages/admin/admin.js" />
         <option value="$PROJECT_DIR$/src/pages/index/index.js" />
       </list>
     </option>
@@ -381,6 +368,15 @@
               <item name="webao_taro" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="managePrice" type="462c0819:PsiDirectoryNode" />
+              <item name="batchManage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webao_taro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webao_taro" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="index" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -452,12 +448,14 @@
       <workItem from="1544897444641" duration="14630000" />
       <workItem from="1545012206171" duration="85518000" />
       <workItem from="1545405212071" duration="5870000" />
-      <workItem from="1545564823614" duration="3615000" />
+      <workItem from="1545564823614" duration="4401000" />
+      <workItem from="1545615924262" duration="3010000" />
+      <workItem from="1545660820159" duration="1568000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221671000" />
+    <option name="totallyTimeSpent" value="227035000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -470,9 +468,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18565401" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18565401" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -487,7 +484,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3290398" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50090414" side_tool="true" weight="0.2244898" />
-      <window_info anchor="bottom" x="245" y="217" width="1183" height="471" id="Terminal" order="11" sideWeight="0.49909583" visible="true" weight="0.2244898" />
+      <window_info active="true" anchor="bottom" x="245" y="217" width="1183" height="471" id="Terminal" order="11" sideWeight="0.49909583" visible="true" weight="0.2244898" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -521,9 +518,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/taro-ui/src/components/calendar/controller/interface.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/taro-ui/@types/grid.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -607,16 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1110">
           <caret line="74" column="3" lean-forward="true" selection-start-line="74" selection-start-column="3" selection-end-line="74" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/changePrice.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="953">
-          <caret line="134" column="19" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -656,9 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="533">
           <caret line="103" column="15" lean-forward="true" selection-start-line="103" selection-start-column="15" selection-end-line="103" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -681,33 +662,32 @@
     <entry file="file://$PROJECT_DIR$/src/static/error.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5115">
-          <caret line="347" column="49" selection-start-line="347" selection-start-column="49" selection-end-line="347" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/users/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/rewardIcon.png" />
+    <entry file="file://$PROJECT_DIR$/src/pages/index/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/users/myReward.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/users/listPrice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1320">
+          <caret line="94" column="76" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
         </state>
       </provider>
     </entry>
@@ -715,6 +695,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1425">
           <caret line="100" column="45" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/manage.js" />
+    <entry file="file://$PROJECT_DIR$/src/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Activity/activityDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2925">
+          <caret line="200" column="12" lean-forward="true" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="12" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
@@ -723,45 +721,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/users/myActivity.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="28" column="12" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageActivity/ActivityList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="199" column="8" lean-forward="true" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/index/index.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Activity/activityDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="200" column="12" lean-forward="true" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/users/listPrice.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="94" column="76" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
+        <state relative-caret-position="1680">
+          <caret line="118" column="25" lean-forward="true" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
@@ -770,21 +731,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/listPrice.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="138" column="26" selection-start-line="138" selection-start-column="26" selection-end-line="138" selection-end-column="26" />
+        <state relative-caret-position="1470">
+          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="43" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/rewardIcon.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/users/myReward.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/batchManage/batchDeletePrice.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="101" />
+        <state relative-caret-position="375">
+          <caret line="30" column="85" selection-start-line="30" selection-start-column="85" selection-end-line="30" selection-end-column="85" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/manageActivity/ActivityList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3285">
+          <caret line="224" column="22" lean-forward="true" selection-start-line="224" selection-start-column="22" selection-end-line="224" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/managePrice/changePrice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1920">
+          <caret line="134" column="19" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/admin/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
@@ -793,8 +778,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/users/dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="768">
+          <caret line="212" column="96" selection-start-line="212" selection-start-column="96" selection-end-line="212" selection-end-column="96" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
@@ -803,8 +788,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/index/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="242" column="17" lean-forward="true" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
+        <state relative-caret-position="957">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>

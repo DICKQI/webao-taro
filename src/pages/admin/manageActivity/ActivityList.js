@@ -192,7 +192,7 @@ export default class ActivityList extends Component {
               <AtCard onClick={this.openFloat.bind(this, item.name, item.id)}
                       title={item.name + (item.lottery ? '(已开奖)' : '')}
                       extra={item.author.username}>
-                抽奖详情：。。。。。。
+                <View style='color: gray'>抽奖详情：</View>{item.description}
               </AtCard>
             </View>
           })

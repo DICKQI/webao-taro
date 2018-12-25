@@ -210,7 +210,7 @@ export default class dashboard extends Component {
               <View className='userInfo'>
                 <View style='margin-top: 1vh'>
                   <AtAvatar className='at-row__align-content--end' circle size={"large"}
-                            image='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544496842193&di=bb5d519e49746f85df5e6c7921016f59&imgtype=0&src=http%3A%2F%2Fs9.rr.itc.cn%2Fr%2FwapChange%2F20171_18_16%2Fa9i5ff9624017280331.jpg'>
+                            image='https://webao-oss.oss-cn-shenzhen.aliyuncs.com/icon/head.jpeg'>
                   </AtAvatar>
                 </View>
                 <View style='margin-top: 1vh;'>欢迎 {this.state.username}</View>

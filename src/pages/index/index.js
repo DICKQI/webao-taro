@@ -140,6 +140,10 @@ export default class Index extends Component {
     navigationBarTitleText: '首页',
   };
 
+  reFlash() {
+
+  }
+
   render() {
     const tabList = [
       {
@@ -213,7 +217,7 @@ export default class Index extends Component {
                   <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
                           extra={'发起人：' + item.author.username}>
                     <View className='at-article__p' style='text-align: center;'>
-                      当前参与人数:{item.p_number}
+                      <View style='color: gray'>当前参与人数:{item.p_number}</View>
                     </View>
                     <View>
                       {item.description}
@@ -230,7 +234,7 @@ export default class Index extends Component {
                   <AtCard onClick={this.toAcDetail.bind(this, item.id)} title={item.name}
                           extra={'发起人：' + item.author.username}>
                     <View className='at-article__p' style='text-align: center;'>
-                      当前参与人数:{item.p_number}
+                      <View style='color: gray'>当前参与人数:{item.p_number}</View>
                     </View>
                     <View>
                       {item.description}

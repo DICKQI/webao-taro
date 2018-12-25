@@ -100,7 +100,7 @@ export default class myActivity extends Component {
             {
               this.state.noneLotteryEmpty ?
                 <View style='text-align: center;color:gray;font-size: 20px;margin-top: 70%'>
-                  您参加的活动都已经开奖了或者您还没参加任何活动噢~
+                  这里没有任何活动呢~
                 </View> :
                 this.state.noneLotteryActivity.map((item, index) => {
                   return <View key={index} style='margin: 3vh 3%'>
@@ -115,7 +115,7 @@ export default class myActivity extends Component {
             {
               this.state.lotteryEmpty ?
                 <View style='text-align: center;color:gray;font-size: 20px;margin-top: 70%'>
-                  您还没有已经开奖的活动呢~
+                  这里没有任何活动呢~
                 </View> :
                 this.state.lotteryActivity.map((item, index) => {
                   return <View key={index} style='margin: 3vh 3%'>
